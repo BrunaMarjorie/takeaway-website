@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import background from '../../images/background.jpg';
+import background from '../../images/noodles.png';
 import { shade } from 'polished';
 
 export const Container = styled.div`

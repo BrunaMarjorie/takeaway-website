@@ -9,6 +9,7 @@ import Menu from '../pages/menu/menu';
 import Homepage from '../pages/homepage/homepage';
 import SignIn from '../pages/signIn/signIn';
 import SignUp from '../pages/signUp/signUp';
+import ForgotPassword from '../pages/forgotPassword/forgot';
 
 
 const Menubar = styled.div`
@@ -55,6 +56,7 @@ const Header = () => {
             </Route>
             <Route path="/login" exact component={SignIn} />
             <Route path="/register" exact component={SignUp} />
+            <Route path="/forgotpassword" exact component={ForgotPassword} />
             <Route path="/" component={Homepage} />
         </Switch>
     </Router>

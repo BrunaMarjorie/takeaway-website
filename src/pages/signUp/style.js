@@ -20,8 +20,9 @@ export const Content = styled.div`
     form {
         margin: 10px 0;
         height: 70%;
-        width: 340px;
+        width: 50%;
         text-align: center;
+        width: 340px;
 
     h1 {
         margin-bottom: 24px;
@@ -31,7 +32,7 @@ export const Content = styled.div`
         background: #232129;
         border-radius: 10px;
         border: 2px solid #232129;
-        padding: 10px;
+        padding: 8px;
         width: 100%;
         color: #CCD1D1;
 
@@ -46,6 +47,13 @@ export const Content = styled.div`
         } 
     }
 
+    p {
+        width: 100%;
+        color: #800000;
+        text-align: left;
+        font-size: 12px;
+    }
+
 
     button {
         background: #2f9162;
@@ -56,7 +64,7 @@ export const Content = styled.div`
         color: #312e38;
         width: 100%;
         font-weight: 500;
-        margin-top: 16px;
+        margin-top: 10px;
         
         &:hover {
             background: ${shade(0.2, '#2f9162')}

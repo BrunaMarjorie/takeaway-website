@@ -13,19 +13,14 @@ const SignIn = () => {
         <Container>
             <Content>
                 <form onSubmit={data.handleSubmit}>
-                    <h1>Sign in</h1>
+                    <h1>Reset your password</h1>
+                    <p style={{textAlign: 'center', color:'#312e38', fontWeight:'500', fontSize: '14px'}}>Enter your user email address and we will send you a link to reset your password. </p>
                     <input name='email' type='text' placeholder='E-mail' value={data.values.email} onChange={data.handleChange} />
                     {data.errors.email && data.touched.email && (
                         <p>{data.errors.email}</p>)}
-                    <input name='password' type='password' placeholder='Password' value={data.values.password} onChange={data.handleChange} />
-                    {data.errors.password && data.touched.password && (
-                        <p>{data.errors.password}</p>)}
-                    <Link to='/forgotpassword'> Forgot password? </Link>
-                    <button type='submit'> Sign in </button>
+                   
+                    <button type='submit'> Send email </button>
                 </form>
-                    <div>
-                    <Link to='/register'> <AiOutlineUserAdd /> Create an account</Link>
-                    </div>
             </Content>
             <Background />
         </Container>

@@ -10,12 +10,10 @@ const Form = (callback) => {
     const data = useFormik({
         initialValues: {
             email: '',
-            password: '',
         },
 
         validationSchema: Yup.object().shape({
             email: Yup.string().required('Email is required').email('Invalid format'),
-            password: Yup.string().required('Password is required'),
         }),
 
         onSubmit: values => {
