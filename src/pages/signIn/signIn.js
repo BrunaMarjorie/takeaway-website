@@ -6,7 +6,7 @@ import Form from './form';
 
 
 const SignIn = () => {
-    const { data } = Form();
+    const { data, submit } = Form();
 
 
     return (
@@ -26,6 +26,11 @@ const SignIn = () => {
                     <div>
                     <Link to='/register'> <AiOutlineUserAdd /> Create an account</Link>
                     </div>
+                    <div>
+                    {submit !== null &&
+                        <p>{submit ? submit : null}</p>
+                    }
+                </div>
             </Content>
             <Background />
         </Container>

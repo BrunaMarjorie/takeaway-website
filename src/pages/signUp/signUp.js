@@ -1,11 +1,14 @@
 import React from 'react';
 import { Background, Container, Content } from './style';
 import Form from './form';
+import { Link } from "react-router-dom";
+import { FiLogIn } from 'react-icons/fi';
+
 
 
 const SignUp = () => {
     
-    const { data } = Form();
+    const { data, submit } = Form();
 
     return (
         <Container>
@@ -27,6 +30,16 @@ const SignUp = () => {
                         <p>{data.errors.confPassword}</p>)}
                     <button type='submit'> Sign up </button>
                 </form>
+
+                <div>
+                    {submit !== null &&
+                        <p>{submit ? submit : null}</p>
+                    }
+                    <div>
+                    <Link to='/login'> <FiLogIn /> Log in </Link>
+                    </div>
+                </div>
+
             </Content>
         </Container>
     );

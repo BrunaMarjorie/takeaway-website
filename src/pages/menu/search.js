@@ -1,34 +1,32 @@
 import React, { useState } from 'react';
+import api from '../../services/api';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import api from '../../services/api';
 
 
-const Form = (callback) => {
+const Search = (callback) => {
     const [submit, setSubmit] = useState(false);
-
+    
+    
     const data = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            search: '',
         },
 
         validationSchema: Yup.object().shape({
-            email: Yup.string().required('Email is required').email('Invalid format'),
-            password: Yup.string().required('Password is required'),
+            search: Yup.string().min(3, 'Search must have at least 3 characters').required('Item is required'),
         }),
 
         onSubmit: values => {
-            login();
+            searchItem();   
         }
-
     });
-
-    const login = async () => {
+    
+    const searchItem = async () => {
         let err;
         try {
-            const res = await api.post('/users/login', data.values);
-            
+            const res = await api.post('/search/menu', data.values);
+            console.log(res);
         } catch (e) {
             if (e.response) {
                 err = e.response.data;
@@ -39,12 +37,12 @@ const Form = (callback) => {
             }
         }
     };
-
+    
     return {
         data,
-        submit
+        submit,
     }
 
 }
 
-export default Form;
+export default Search;

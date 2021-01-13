@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import api from '../../services/api';
+
 
 
 const Form = (callback) => {
@@ -17,26 +18,26 @@ const Form = (callback) => {
         }),
 
         onSubmit: values => {
-            setSubmit(true);
+            forgot();
         }
-
     });
 
-    useEffect(() => {
-        if (submit === true) {
-            //CreateUser();
-            console.log(data.values);
+    const forgot = async () => {
+        let err;
+        try {
+            const res = await api.post('/forgot/password', data.values);
+            setSubmit("Please check your mailbox.");
+
+        } catch (e) {
+            setSubmit("Some error has occured. Please try again.");
         }
-
-    }, [submit]);
-
-
-    async function Login() {
-        const post = await api.post('/users/login', data);
     };
+
+
 
     return {
         data,
+        submit,
     }
 
 }

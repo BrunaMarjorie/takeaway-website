@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import background from '../../images/background.jpg';
 import { shade } from 'polished';
 
 export const Container = styled.div`
@@ -8,6 +7,11 @@ export const Container = styled.div`
     align-items: stretch;
     flex-direction: column; 
 `;
+
+export const Search = styled.div`
+    margin-top: 50px;
+`;
+
 
 export const Content = styled.div`
     display: flex;
@@ -81,8 +85,3 @@ export const Content = styled.div`
 
 `;
 
-export const Background = styled.div`
-    flex: 1;
-    background: url(${background}) no-repeat center;
-    background-size: cover;
-`;

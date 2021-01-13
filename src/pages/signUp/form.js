@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import api from '../../services/api';
@@ -6,7 +6,7 @@ import api from '../../services/api';
 
 const Form = (callback) => {
     const [submit, setSubmit] = useState(false);
-    
+
     const data = useFormik({
         initialValues: {
             name: '',
@@ -23,26 +23,31 @@ const Form = (callback) => {
         }),
 
         onSubmit: values => {
-            setSubmit(true);
+            createUser();
         }
-        
+
     });
 
-    useEffect(() => {
-        if (submit === true){
-            //CreateUser();
-            console.log(data.values);
-        }      
 
-    }, [submit]);
-
-    
-    async function CreateUser() {
-        const post = await api.post('/users/register', data);
+    const createUser = async () => {
+        let err;
+        try {
+            const res = await api.post('/users/register', data.values);
+            setSubmit("Account created successfully.");
+        } catch (e) {
+            if (e.response) {
+                err = e.response.data;
+                const { error } = err;
+                setSubmit(error);
+            } else {
+                setSubmit("Some error has occured. Please try again.");
+            }
+        }
     };
 
     return {
         data,
+        submit,
     }
 
 }
