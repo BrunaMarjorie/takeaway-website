@@ -7,12 +7,13 @@ import { MDBBtn, MDBCol, MDBFormInline } from "mdbreact";
 import SearchItem from './search';
 import { FaSearch } from 'react-icons/fa';
 import api from '../../services/api';
+import { Table, FormCheck } from 'react-bootstrap';
 
 
 
 const Menu = () => {
 
-  const { data, submit } = SearchItem();
+  const { data } = SearchItem();
   const [menu, setMenu] = useState([]);
 
   useEffect(() => {
@@ -35,12 +36,6 @@ const Menu = () => {
     }
   };
 
-  console.log(menu);
-
-  const list = menu.map((item) =>
-    <li key='item'>item</li>
-  );
-
   return (
     <Container>
       <Search>
@@ -54,22 +49,277 @@ const Menu = () => {
         </MDBCol>
       </Search>
       <Content>
-        <dl>
-          <dt>Soups</dt>
-          {menu.map((menu, key) => {
-            return <button color={'darkblue'} key={key} title={menu.dish}
-              //when pressed the button, an alert will be send 
-              //with the collected information
-              //onPress={() => Alert.alert(
-                //place.place + ' on ' + place.date,
-                //'\n Weather: ' + place.descr + ' (' + place.temp + '\u00b0) \n \n Local currency: '
-                //+ place.currency + '\n \n Day rate: 1 USD = ' + place.rate + ' ' + place.iso_code
-
-              //)
-            >{menu.dish}</button>
-          }
-          )}
-        </dl>
+        <Table responsive style={{ maxWidth: '700px' }} >
+          <thead>
+            <tr>
+              <th></th>
+              <th>Item</th>
+              <th style={{ width: '500px' }}>Description</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td > Soups </td>
+              <td></td>
+            </tr>
+            {menu.map((item, key) => {
+              const type = item.type;
+              if (type === 'soup') {
+                const price = parseFloat(item.price).toFixed(2);
+                const ingredients = item.ingredients;
+                let ingList = '';
+                ingredients.map((ing, index) => {
+                  ingList += ing + ", ";
+                });
+                let allergens = "";
+                if (item.allergens[0] ) {
+                    allergens = `(Allergens: ${item.allergens})`
+                }
+                return (
+                  <tr key={key}>
+                    <td> <FormCheck type='checkbox'>
+                    </FormCheck> </td>
+                    <td>{item.number}</td>
+                    <td color={'darkblue'}>
+                      <div>
+                        {item.dish} {allergens}
+                      </div>
+                      <div style={{fontStyle:'italic'}}>
+                        (Ingredients: {ingList})
+                      </div>
+                    </td>
+                    <td>{price}</td>
+                  </tr>
+                )
+              }
+            })}
+            <tr>
+              <td></td>
+              <td></td>
+              <td > Starters </td>
+              <td></td>
+            </tr>
+            {menu.map((item, key) => {
+              const type = item.type;
+              if (type === 'starter') {
+                const price = parseFloat(item.price).toFixed(2);
+                const ingredients = item.ingredients;
+                let ingList = '';
+                ingredients.map((ing, index) => {
+                  ingList += ing + ", ";
+                });
+                let allergens = "";
+                if (item.allergens[0] ) {
+                    allergens = `(Allergens: ${item.allergens})`
+                }
+                return (
+                  <tr key={key}>
+                    <td> <FormCheck type='checkbox'>
+                    </FormCheck> </td>
+                    <td>{item.number}</td>
+                    <td color={'darkblue'}>
+                      <div>
+                        {item.dish} {allergens}
+                      </div>
+                      <div style={{fontStyle:'italic'}}>
+                        (Ingredients: {ingList})
+                      </div>
+                    </td>
+                    <td>{price}</td>
+                  </tr>
+                )
+              }
+            })}
+            <tr>
+              <td></td>
+              <td></td>
+              <td > Satay </td>
+              <td></td>
+            </tr>
+            {menu.map((item, key) => {
+              const type = item.type;
+              if (type === 'satay') {
+                const price = parseFloat(item.price).toFixed(2);
+                const ingredients = item.ingredients;
+                let ingList = '';
+                ingredients.map((ing, index) => {
+                  ingList += ing + ", ";
+                });
+                let allergens = "";
+                if (item.allergens[0] ) {
+                    allergens = `(Allergens: ${item.allergens})`
+                }
+                return (
+                  <tr key={key}>
+                    <td> <FormCheck type='checkbox'>
+                    </FormCheck> </td>
+                    <td>{item.number}</td>
+                    <td color={'darkblue'}>
+                      <div>
+                        {item.dish} {allergens}
+                      </div>
+                      <div style={{fontStyle:'italic'}}>
+                        (Ingredients: {ingList})
+                      </div>
+                    </td>
+                    <td>{price}</td>
+                  </tr>
+                )
+              }
+            })}
+            <tr>
+              <td></td>
+              <td></td>
+              <td > Curry </td>
+              <td></td>
+            </tr>
+            {menu.map((item, key) => {
+              const type = item.type;
+              if (type === 'curry') {
+                const price = parseFloat(item.price).toFixed(2);
+                const ingredients = item.ingredients;
+                let ingList = '';
+                ingredients.map((ing, index) => {
+                  ingList += ing + ", ";
+                });
+                let allergens = "";
+                if (item.allergens[0] ) {
+                    allergens = `(Allergens: ${item.allergens})`
+                }
+                return (
+                  <tr key={key}>
+                    <td> <FormCheck type='checkbox'>
+                    </FormCheck> </td>
+                    <td>{item.number}</td>
+                    <td color={'darkblue'}>
+                      <div>
+                        {item.dish} {allergens}
+                      </div>
+                      <div style={{fontStyle:'italic'}}>
+                        (Ingredients: {ingList})
+                      </div>
+                    </td>
+                    <td>{price}</td>
+                  </tr>
+                )
+              }
+            })}
+            <tr>
+              <td></td>
+              <td></td>
+              <td > Rice </td>
+              <td></td>
+            </tr>
+            {menu.map((item, key) => {
+              const type = item.type;
+              if (type === 'rice') {
+                const price = parseFloat(item.price).toFixed(2);
+                const ingredients = item.ingredients;
+                let ingList = '';
+                ingredients.map((ing, index) => {
+                  ingList += ing + ", ";
+                });
+                let allergens = "";
+                if (item.allergens[0] ) {
+                    allergens = `(Allergens: ${item.allergens})`
+                }
+                return (
+                  <tr key={key}>
+                    <td> <FormCheck type='checkbox'>
+                    </FormCheck> </td>
+                    <td>{item.number}</td>
+                    <td color={'darkblue'}>
+                      <div>
+                        {item.dish} {allergens}
+                      </div>
+                      <div style={{fontStyle:'italic'}}>
+                        (Ingredients: {ingList})
+                      </div>
+                    </td>
+                    <td>{price}</td>
+                  </tr>
+                )
+              }
+            })}
+            <tr>
+              <td></td>
+              <td></td>
+              <td > Chow Mein </td>
+              <td></td>
+            </tr>
+            {menu.map((item, key) => {
+              const type = item.type;
+              if (type === 'mein') {
+                const price = parseFloat(item.price).toFixed(2);
+                const ingredients = item.ingredients;
+                let ingList = '';
+                ingredients.map((ing, index) => {
+                  ingList += ing + ", ";
+                });
+                let allergens = "";
+                if (item.allergens[0] ) {
+                    allergens = `(Allergens: ${item.allergens})`
+                }
+                return (
+                  <tr key={key}>
+                    <td> <FormCheck type='checkbox'>
+                    </FormCheck> </td>
+                    <td>{item.number}</td>
+                    <td color={'darkblue'}>
+                      <div>
+                        {item.dish} {allergens}
+                      </div>
+                      <div style={{fontStyle:'italic'}}>
+                        (Ingredients: {ingList})
+                      </div>
+                    </td>
+                    <td>{price}</td>
+                  </tr>
+                )
+              }
+            })}
+            <tr>
+              <td></td>
+              <td></td>
+              <td > Sides </td>
+              <td></td>
+            </tr>
+            {menu.map((item, key) => {
+              const type = item.type;
+              if (type === 'side') {
+                const price = parseFloat(item.price).toFixed(2);
+                const ingredients = item.ingredients;
+                let ingList = '';
+                ingredients.map((ing, index) => {
+                  ingList += ing + ", ";
+                });
+                let allergens = "";
+                if (item.allergens[0] ) {
+                    allergens = `(Allergens: ${item.allergens})`
+                }
+                return (
+                  <tr key={key}>
+                    <td> <FormCheck type='checkbox'>
+                    </FormCheck> </td>
+                    <td>{item.number}</td>
+                    <td color={'darkblue'}>
+                      <div>
+                        {item.dish} {allergens}
+                      </div>
+                      <div style={{fontStyle:'italic'}}>
+                        (Ingredients: {ingList})
+                      </div>
+                    </td>
+                    <td>{price}</td>
+                  </tr>
+                )
+              }
+            })}
+          </tbody>
+        </Table>
       </Content>
     </Container>
   )

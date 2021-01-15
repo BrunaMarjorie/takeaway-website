@@ -4,10 +4,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 
-const Search = (callback) => {
-    const [submit, setSubmit] = useState(false);
-    
-    
+const Search = () => {
+
     const data = useFormik({
         initialValues: {
             search: '',
@@ -18,29 +16,31 @@ const Search = (callback) => {
         }),
 
         onSubmit: values => {
-            searchItem();   
+            searchItem(data.values.search);
+
         }
     });
-    
-    const searchItem = async () => {
-        let err;
-        try {
-            const res = await api.post('/search/menu', data.values);
-            console.log(res);
-        } catch (e) {
-            if (e.response) {
-                err = e.response.data;
-                const { error } = err;
-                setSubmit(error);
-            } else {
-                setSubmit("Some error has occured. Please try again.");
+
+    const searchItem = async (search) => {
+        const filter = search;
+        const table = document.getElementById('myTable');
+        console.log(table);
+        const tr = table.getElementsByTagName("tr");
+        for (var i = 0; i < tr.length; i++) {
+            const td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                const txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
             }
         }
     };
-    
+
     return {
         data,
-        submit,
     }
 
 }
