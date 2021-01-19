@@ -25,8 +25,16 @@ export const Content = styled.div`
     }
 
     p { 
+      font-size: 0.8rem;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    h3 { 
       font-size: 1.5rem;
       color: #fff;
       text-align: center;
+      margin-bottom: 210px
     }
 `;

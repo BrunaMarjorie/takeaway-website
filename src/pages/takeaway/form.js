@@ -6,7 +6,9 @@ import { Redirect, useHistory } from "react-router-dom";
 
 
 const Form = (callback) => {
+    
     const [submit, setSubmit] = useState(false);
+    const [auth, setAuth ] = useState(false);
     const history = useHistory();
 
     const data = useFormik({

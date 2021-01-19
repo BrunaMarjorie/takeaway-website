@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import background from '../../images/background.jpg';
+import logo from '../../images/new.jpg';
 import { shade } from 'polished';
+
 
 export const Container = styled.div`
     height: 100vh;
     display: flex;
-    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    scroll-padding: 1000px;
 `;
 
 
@@ -16,26 +20,31 @@ export const Content = styled.div`
     place-content: center;
     width: 100%;
     max-width: 700px;
+    margin-top: 1px;
     background-image: radial-gradient(#8e9eab, #eef2f3);
-    
+
     form {
         margin: 10px 0;
         height: 70%;
-        width: 340px;
         text-align: center;
-
-    h1 {
-        margin-top: 50px;
+        width: 70%;
+    
+        h1 {
+        margin-top: 8px;
         margin-bottom: 24px;
+        font-size: 24px;
     }
 
-    input {
+    input, select {
+        flex: 1;
         background: #232129;
         border-radius: 10px;
         border: 2px solid #232129;
-        padding: 10px;
-        width: 100%;
+        padding: 7px;
+        width: 55%;
         color: #CCD1D1;
+        margin-bottom: 10px;
+
 
         &:focus {
             background: #CCD1D1;
@@ -50,7 +59,7 @@ export const Content = styled.div`
     p {
         width: 100%;
         color: #800000;
-        text-align: left;
+        text-align: center;
         font-size: 12px;
     }
 
@@ -61,7 +70,7 @@ export const Content = styled.div`
         border: 0;
         padding: 0 10px;
         color: #312e38;
-        width: 100%;
+        width: 55%;
         font-weight: 500;
         margin-top: 16px;
         
@@ -99,11 +108,13 @@ export const Content = styled.div`
             color: ${shade(0.2, '#2f9162')}
         }
     }
-
 `;
+
 
 export const Background = styled.div`
     flex: 1;
-    background: url(${background}) no-repeat center;
+    background: url(${logo}) no-repeat center;
     background-size: cover;
 `;
+
+

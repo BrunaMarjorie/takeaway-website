@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import logo from '../../images/chinese.jpg';
-import { shade } from 'polished';
 
 export const Container = styled.div`
     height: 100vh;
@@ -13,19 +12,16 @@ export const Container = styled.div`
     background-size: cover;
 `;
 
-export const Search = styled.div`
-    margin-top: 50px;
-`;
-
 
 export const Content = styled.div`
     display: flex;
     flex-direction: row;
     height: 80vh;
+    max-width:800px;
     margin-top: 100px;
     background-color: #DDD8D7;
     text-align: center;
-
+    line-height: 20px;    
 `;
 
 export const Title = styled.tr`

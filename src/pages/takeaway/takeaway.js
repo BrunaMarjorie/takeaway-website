@@ -1,21 +1,26 @@
-import React, {useEffect} from 'react';
-import { AiOutlineUserAdd } from 'react-icons/ai';
-import { Background, Container, Content } from './style';
+import React from 'react';
+import { Container, Content } from './style';
 import { Link } from "react-router-dom";
 import Form from './form';
 
 
+const Takeaway = () => {
 
-const SignIn = () => {
-    
     const { data, submit } = Form();
-    
+
+    let date = new Date();
+    date = date.getDate();
+
     return (
         <Container>
             <Content>
                 <form onSubmit={data.handleSubmit}>
-                    <h1>Sign in</h1>
-                    <input name='email' type='text' placeholder='E-mail' value={data.values.email} onChange={data.handleChange} />
+                    <h1>Select date to pick up</h1>
+                    <select name='date'>
+                        <option>{date}</option>
+                        <option>tomorrow</option>
+                    </select>
+                    <input name='email' type='select' placeholder='E-mail' value={data.values.email} onChange={data.handleChange} />
                     {data.errors.email && data.touched.email && (
                         <p>{data.errors.email}</p>)}
                     <input name='password' type='password' placeholder='Password' value={data.values.password} onChange={data.handleChange} />
@@ -30,12 +35,11 @@ const SignIn = () => {
                     }
                 </div>
                 <div>
-                    <Link to='/register'> <AiOutlineUserAdd /> Create an account</Link>
+                    <Link to='/register'> Create an account</Link>
                 </div>
             </Content>
-            <Background />
         </Container>
     )
 };
 
-export default SignIn;
+export default Takeaway;

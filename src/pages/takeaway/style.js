@@ -6,6 +6,8 @@ export const Container = styled.div`
     height: 100vh;
     display: flex;
     align-items: stretch;
+    background-image: radial-gradient(#8e9eab, #eef2f3);
+    
 `;
 
 
@@ -16,7 +18,6 @@ export const Content = styled.div`
     place-content: center;
     width: 100%;
     max-width: 700px;
-    background-image: radial-gradient(#8e9eab, #eef2f3);
     
     form {
         margin: 10px 0;
@@ -30,17 +31,9 @@ export const Content = styled.div`
     }
 
     input {
-        background: #232129;
-        border-radius: 10px;
-        border: 2px solid #232129;
         padding: 10px;
         width: 100%;
-        color: #CCD1D1;
-
-        &:focus {
-            background: #CCD1D1;
-            color: #232129;
-        }
+        color: #fff;
 
         & + input {
             margin-top: 8px;
@@ -101,6 +94,8 @@ export const Content = styled.div`
     }
 
 `;
+
+
 
 export const Background = styled.div`
     flex: 1;
