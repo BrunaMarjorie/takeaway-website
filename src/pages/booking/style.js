@@ -9,7 +9,7 @@ export const Container = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     max-width: 100%;
-    scroll-padding: 1000px;
+    
 `;
 
 
@@ -20,11 +20,10 @@ export const Content = styled.div`
     place-content: center;
     width: 100%;
     max-width: 700px;
-    margin-top: 1px;
     background-image: radial-gradient(#8e9eab, #eef2f3);
 
     form {
-        margin: 10px 0;
+        margin-bottom: 10px;
         height: 70%;
         text-align: center;
         width: 70%;

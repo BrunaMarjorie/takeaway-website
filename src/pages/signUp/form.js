@@ -10,6 +10,7 @@ const Form = (callback) => {
     const data = useFormik({
         initialValues: {
             name: '',
+            phoneNumber: '',
             email: '',
             password: '',
             confPassword: ''
@@ -17,6 +18,7 @@ const Form = (callback) => {
 
         validationSchema: Yup.object().shape({
             name: Yup.string().min(2, 'Minimum 2 characters').required('Name is required'),
+            phoneNumber: Yup.number().required('Phone number is required'),
             email: Yup.string().required('Email is required').email('Invalid format'),
             password: Yup.string().required('Password is required').min(6, 'Password must have at least 6 characters'),
             confPassword: Yup.string().oneOf([Yup.ref('password')], 'Password does not match').required('Confirm Password is required')

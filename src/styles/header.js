@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
 import { shade } from 'polished';
-
-
-import Menu from '../pages/menu/menu';
-import Homepage from '../pages/homepage/homepage';
-import SignIn from '../pages/signIn/signIn';
-import SignUp from '../pages/signUp/signUp';
-import ForgotPassword from '../pages/forgotPassword/forgot';
-import Logout from '../pages/logout';
-import Takeaway from '../pages/takeaway/takeaway';
-import Booking from '../pages/booking/booking';
 
 
 
@@ -38,12 +28,12 @@ const Menubar = styled.nav`
 
 const Header = () => {
 
-    const [auth, SetAuth] = useState();
+    const [auth, setAuth] = useState();
 
     useEffect(() => {
-        SetAuth(JSON.parse(sessionStorage.getItem('user')));
+        setAuth(JSON.parse(sessionStorage.getItem('user')));
     
-    }, [auth]);
+    }, []);
 
 
     const isAuth = () => {
@@ -55,8 +45,7 @@ const Header = () => {
     }
 
 
-    return <Router>
-        <Menubar>
+    return <Menubar>
             <Navbar bg="light" expand="lg">
                 <Navbar.Collapse >
                     <Nav className="ml-auto">
@@ -71,18 +60,7 @@ const Header = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-        </Menubar>
-        <Switch>
-            <Route path="/menu" exact component={Menu} />
-            <Route path="/booking" exact component={Booking} />
-            <Route path="/takeout" exact component={Takeaway} />
-            <Route path="/login" exact component={SignIn} />
-            <Route path="/logout" exact component={Logout} />
-            <Route path="/register" exact component={SignUp} />
-            <Route path="/forgotpassword" exact component={ForgotPassword} />
-            <Route path="/" component={Homepage} />
-        </Switch>
-    </Router>
+        </Menubar>      
 }
 
 export default Header;

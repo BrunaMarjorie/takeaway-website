@@ -2,44 +2,38 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import api from '../../services/api';
-import 'react-day-picker/lib/style.css';
+import { Redirect, useHistory } from "react-router-dom";
 
 
-const Calendar = (callback) => {
+const Form = (callback) => {
+    
     const [submit, setSubmit] = useState(false);
+    const history = useHistory();
 
     const data = useFormik({
         initialValues: {
-            date: '',
-            time: '',
-            number: '',
-            name: '',
             email: '',
-            phoneNumber: '',
-            user: '',
+            password: '',
         },
 
         validationSchema: Yup.object().shape({
-            date: Yup.string().required('Date is required'),
-            time: Yup.string().required('Time is required'),
-            number: Yup.number().required('Number of people is required'),
-            name: Yup.string().required('Name is required').min(3, 'At least 3 characters'),
             email: Yup.string().required('Email is required').email('Invalid format'),
-            phoneNumber: Yup.number().required('Phone number is required'),
-            user: Yup.string().required('You must be logged in')
+            password: Yup.string().required('Password is required'),
         }),
 
         onSubmit: values => {
-            addBooking();
+            login();
         }
 
     });
 
-    const addBooking = async () => {
+    const login = async () => {
         let err;
         try {
-            const res = await api.post('/bookings', data.values);
-            setSubmit("Table successfully booked.");
+            const res = await api.post('/users/login', data.values);
+            sessionStorage.setItem('user', JSON.stringify(res.data));
+            setSubmit('You are logged in!');
+            history.go(0);
         } catch (e) {
             if (e.response) {
                 err = e.response.data;
@@ -59,4 +53,4 @@ const Calendar = (callback) => {
 
 }
 
-export default Calendar;
+export default Form;

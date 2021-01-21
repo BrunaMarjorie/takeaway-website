@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import api from '../../services/api';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 

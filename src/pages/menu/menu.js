@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Content, Title } from '../menu/style';
 import 'bootstrap-css-only/css/bootstrap.min.css';
-import SearchItem from './search';
-import { Table, Dropdown } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { Redirect } from "react-router-dom";
+import Header from '../../styles/header';
 
 
 const Menu = () => {
@@ -53,63 +53,66 @@ const Menu = () => {
 
 
   return (
-    <Container>
-      <Content>
-        <Table responsive>
-          <thead>
-            <tr>
-              <th style={{ width: '5px' }}>Item</th>
-              <th style={{ width: '25px' }}>Description</th>
-              <th style={{ width: '5px' }}>Price (€)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <Title>
-              <td></td>
-              <td > Soups </td>
-              <td></td>
-            </Title>
-            {types('soup')}
-            <Title>
-              <td></td>
-              <td > Starters </td>
-              <td></td>
-            </Title>
-            {types('starter')}
-            <Title>
-              <td></td>
-              <td > Satay </td>
-              <td></td>
-            </Title>
-            {types('satay')}
-            <Title>
-              <td></td>
-              <td > Curry </td>
-              <td></td>
-            </Title>
-            {types('curry')}
-            <Title>
-              <td></td>
-              <td > Rice </td>
-              <td></td>
-            </Title>
-            {types('rice')}
-            <Title>
-              <td></td>
-              <td > Chow Mein </td>
-              <td></td>
-            </Title>
-            {types('mein')}
-            <Title>
-              <td></td>
-              <td > Sides </td>
-              <td></td>
-            </Title>
-            {types('side')}
-          </tbody>
-        </Table>
-      </Content>
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Content>
+          <Table responsive>
+            <thead>
+              <tr>
+                <th style={{ width: '5px' }}>Item</th>
+                <th style={{ width: '25px' }}>Description</th>
+                <th style={{ width: '5px' }}>Price (€)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <Title>
+                <td></td>
+                <td > Soups </td>
+                <td></td>
+              </Title>
+              {types('soup')}
+              <Title>
+                <td></td>
+                <td > Starters </td>
+                <td></td>
+              </Title>
+              {types('starter')}
+              <Title>
+                <td></td>
+                <td > Satay </td>
+                <td></td>
+              </Title>
+              {types('satay')}
+              <Title>
+                <td></td>
+                <td > Curry </td>
+                <td></td>
+              </Title>
+              {types('curry')}
+              <Title>
+                <td></td>
+                <td > Rice </td>
+                <td></td>
+              </Title>
+              {types('rice')}
+              <Title>
+                <td></td>
+                <td > Chow Mein </td>
+                <td></td>
+              </Title>
+              {types('mein')}
+              <Title>
+                <td></td>
+                <td > Sides </td>
+                <td></td>
+              </Title>
+              {types('side')}
+            </tbody>
+          </Table>
+        </Content>
+      </Container>
+    </>
   )
 };
 

@@ -14,7 +14,7 @@ body {
     color: #000;
 }
 
-body, input, button {
+body, input, button, a {
     font-family: 'Roboto Slab', serif;
     font-size: 16px;
 }

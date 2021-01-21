@@ -1,6 +1,7 @@
 import React from 'react';
 import { Background, Container, Content } from './style';
 import Form from './form';
+import Header from '../../styles/header';
 
 
 const SignIn = () => {
@@ -8,6 +9,8 @@ const SignIn = () => {
 
 
     return (
+        <>
+        <Header />
         <Container>
             <Content>
                 <form onSubmit={data.handleSubmit}>
@@ -27,6 +30,7 @@ const SignIn = () => {
             </Content>
             <Background />
         </Container>
+        </>
     )
 };
 

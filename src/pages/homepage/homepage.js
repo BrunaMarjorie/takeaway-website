@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Container, Content } from '../homepage/style';
-import api from '../../services/api';
+import Header from '../../styles/header';
 
 
 const Homepage = () => {
 
   return (
     <>
+    <Header />
       <Container>
         <Content><h1>Welcome to Takeaway Restaurant</h1>
           <h3>Available for eating-in, takeaway and delivery</h3>

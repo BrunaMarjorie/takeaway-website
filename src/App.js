@@ -1,7 +1,18 @@
 import React, { useEffect } from 'react';
 import GlobalStyle from './styles/global';
-import Header from './styles/header';
 import api from './services/api';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+
+import Menu from '../src/pages/menu/menu';
+import Homepage from '../src/pages/homepage/homepage';
+import SignIn from '../src/pages/signIn/signIn';
+import SignUp from '../src/pages/signUp/signUp';
+import ForgotPassword from '../src/pages/forgotPassword/forgot';
+import Logout from '../src/pages/logout';
+import Takeaway from '../src/pages/takeaway/takeaway';
+import Booking from '../src/pages/booking/booking';
+import StaffPage from '../src/pages/staff/staff';
 
 
 const App = () => {
@@ -17,7 +28,19 @@ const App = () => {
 
   return <>
     <GlobalStyle />
-    <Header />
+    <Router>
+    <Switch>
+            <Route path="/menu" exact component={Menu} />
+            <Route path="/staffpage" exact component={StaffPage} />
+            <Route path="/booking" exact component={Booking} />
+            <Route path="/takeout" exact component={Takeaway} />
+            <Route path="/login" exact component={SignIn} />
+            <Route path="/logout" exact component={Logout} />
+            <Route path="/register" exact component={SignUp} />
+            <Route path="/forgotpassword" exact component={ForgotPassword} />
+            <Route path="/" component={Homepage} />
+        </Switch>
+    </Router>
   </>
 }
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import api from '../../services/api';
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, Link } from "react-router-dom";
 
 
 const Form = (callback) => {
@@ -27,12 +27,17 @@ const Form = (callback) => {
     });
 
     const login = async () => {
+        setSubmit('Loading...');
         let err;
         try {
             const res = await api.post('/users/login', data.values);
             sessionStorage.setItem('user', JSON.stringify(res.data));
-            setSubmit('You are logged in!');
-            history.go(0);
+            if (res.data.status === 'costumer'){
+                history.goBack();
+            
+            } else {
+                setSubmit(<Link to='/staffpage'>Staff page</Link> );
+            }
         } catch (e) {
             if (e.response) {
                 err = e.response.data;
