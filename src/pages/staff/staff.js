@@ -5,6 +5,7 @@ import 'react-day-picker/lib/style.css';
 import Header from '../../styles/header';
 import { Row, Col, Table } from 'reactstrap';
 import api from '../../services/api';
+import Order from './orders';
 
 
 
@@ -46,10 +47,9 @@ const Staff = () => {
         setDeliveries(null);
     }
 
-
     return (
         <>
-        <Header />
+            <Header />
             <Container>
                 <Col>
                     <ContainerSec>
@@ -113,7 +113,7 @@ const Staff = () => {
                                     </Row>
 
                                     <div style={{ overflow: 'auto', maxHeight: '200px' }}>
-                                        <Table style={{ maxWidth: '350px', marginLeft: '10px' }}>
+                                        <Table style={{ maxWidth: '350px', marginLeft: '10px', fontSize: '14px' }}>
                                             <thead>
                                                 <tr>
                                                     <th style={{ width: '20px' }}>Name</th>
@@ -131,10 +131,10 @@ const Staff = () => {
                                                     return (
                                                         <tbody>
                                                             <tr key={index}>
-                                                                <th >{booking.name}</th>
-                                                                <th >{date}</th>
-                                                                <th >{time}h</th>
-                                                                <th >{booking.numPeople}</th>
+                                                                <th style={{ fontWeight: '300' }}>{booking.name}</th>
+                                                                <th style={{ fontWeight: '300' }}>{date}</th>
+                                                                <th style={{ fontWeight: '300' }}>{time}h</th>
+                                                                <th style={{ fontWeight: '300' }}>{booking.numPeople}</th>
                                                             </tr>
                                                         </tbody>
                                                     );
@@ -156,25 +156,27 @@ const Staff = () => {
                                 <button type='button' onClick={retrieveTakeaway}>
                                     Retrieve </button>
                             </Row>
-                            <div style={{ overflow: 'auto', maxHeight: '550px' }}>
-                                <Table style={{ maxWidth: '350px' }}>
+                            <div style={{ overflow: 'auto', maxHeight: '350px' }}>
+                                <Table style={{ width: '100%', maxWidth: '500px', fontSize: '14px' }}>
                                     <thead>
                                         <tr style={{ position: 'sticky' }}>
-                                            <th style={{ width: '20px' }}>Name</th>
-                                            <th style={{ width: '5px' }}>Time</th>
-                                            <th style={{ width: '5px' }}>Paid</th>
+                                            <th style={{ width: '50px' }}></th>
+                                            <th style={{ width: '150px' }}>Name</th>
+                                            <th style={{ width: '150px' }}>Time</th>
+                                            <th style={{ width: '150px' }}>Paid</th>
                                         </tr>
                                     </thead>
                                     {takeaways &&
                                         takeaways.map((takeaway, key) => {
                                             return (
-                                                <tbody>
-                                                    <tr key={key}>
-                                                        <th >{takeaway.costumer}</th>
-                                                        <th >{takeaway.time}</th>
-                                                        <th >{takeaway.paid}</th>
-
+                                                <tbody key={key}>
+                                                    <tr>
+                                                        <th><Order id={takeaway._id} /></th>
+                                                        <th style={{ fontWeight: '300' }}>{takeaway.costumer}</th>
+                                                        <th style={{ fontWeight: '300' }}>{takeaway.time}</th>
+                                                        <th style={{ fontWeight: '300' }}>{takeaway.paid}</th>
                                                     </tr>
+                                                    <tr></tr>
                                                 </tbody>
                                             );
                                         })}
@@ -193,13 +195,14 @@ const Staff = () => {
                                 <button type='button' onClick={retrieveDelivery}>
                                     Retrieve </button>
                             </Row>
-                            <div style={{ overflow: 'auto', maxHeight: '550px' }}>
-                                <Table style={{ maxWidth: '350px' }}>
+                            <div style={{ overflow: 'auto', maxHeight: '350px' }}>
+                                <Table style={{ width: '100%', maxWidth: '500px', fontSize: '14px' }}>
                                     <thead>
                                         <tr style={{ position: 'sticky' }}>
-                                            <th style={{ width: '15px' }}>Address</th>
-                                            <th style={{ width: '5px' }}>Time</th>
-                                            <th style={{ width: '5px' }}>Paid</th>
+                                            <th style={{ width: '50px' }}></th>
+                                            <th style={{ width: '150px' }}>Address</th>
+                                            <th style={{ width: '150px' }}>Time</th>
+                                            <th style={{ width: '150px' }}>Paid</th>
                                         </tr>
                                     </thead>
                                     {deliveries &&
@@ -207,9 +210,10 @@ const Staff = () => {
                                             return (
                                                 <tbody>
                                                     <tr key={item}>
-                                                        <th >{delivery.address}</th>
-                                                        <th >{delivery.time}</th>
-                                                        <th >{delivery.paid}</th>
+                                                        <th><Order id={delivery._id} /></th>
+                                                        <th style={{ fontWeight: '300' }}>{delivery.address}</th>
+                                                        <th style={{ fontWeight: '300' }}>{delivery.time}</th>
+                                                        <th style={{ fontWeight: '300' }}>{delivery.paid}</th>
 
                                                     </tr>
                                                 </tbody>

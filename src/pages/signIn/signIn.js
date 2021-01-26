@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { Background, Container, Content } from './style';
 import { Link } from "react-router-dom";

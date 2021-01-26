@@ -9,6 +9,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     max-width: 100%;
+    scroll-padding: 1000px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${logo});
     background-size: cover;
     
@@ -117,8 +118,9 @@ export const Takeaway = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 89vh;
+    height: 80vh;
     max-width: 450px;
+    width: 100%;
     margin-top: 60px;
     background-image: radial-gradient(#8e9eab, #eef2f3);
     text-align: center;
@@ -129,7 +131,7 @@ export const Takeaway = styled.div`
         margin-bottom: 10px;
         height: 70%;
         text-align: center;
-        width: 300px;
+        width: 350px;
         margin-right: 10px;
     
         h1 {

@@ -41,7 +41,7 @@ const Bookings = () => {
 
     function handleDayChange(day) {
         let selectedDay = new Date (day);
-        selectedDay = selectedDay.getUTCFullYear()+'/'+selectedDay.getMonth()+1+'/'+selectedDay.getDate();
+        selectedDay = selectedDay.getFullYear()+'/'+selectedDay.getMonth()+1+'/'+selectedDay.getDate();
         data.setFieldValue('date', selectedDay);
     }
 

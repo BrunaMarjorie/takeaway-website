@@ -10,9 +10,7 @@ const Logout = () => {
     useEffect(() => {
         history.go(0);
     }, [])
-    
-    
-    
+      
 
     return <Redirect to='/' />
 }

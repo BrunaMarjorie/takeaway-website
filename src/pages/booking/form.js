@@ -38,7 +38,7 @@ const Calendar = (callback) => {
     const addBooking = async () => {
         let err;
         try {
-            const res = await api.post('/bookings', data.values);
+            const res = await api.post(`/bookings/:${data.values.email}`, data.values);
             setSubmit("Table successfully booked.");
         } catch (e) {
             if (e.response) {

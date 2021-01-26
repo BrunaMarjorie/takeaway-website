@@ -18,6 +18,7 @@ const Form = (callback) => {
             date: today,
             name: '',
             phoneNumber: '',
+            address: '',
             comment: '',
             user: '',
             order: '',
@@ -27,6 +28,7 @@ const Form = (callback) => {
         validationSchema: Yup.object().shape({
             name: Yup.string().required('Name is required').min(3, 'At least 3 characters'),
             phoneNumber: Yup.number().required('Phone number is required'),
+            address: Yup.string().required('Address is required'),
             user: Yup.string().required('You must be logged in'),
             order: Yup.array().required('There is no order')
         }),

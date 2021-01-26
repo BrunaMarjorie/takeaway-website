@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
 import { shade } from 'polished';
-
 
 
 const Menubar = styled.nav`
     display: flex;
     flex-direction: column;
     width: 100%;
-    position: fixed;
+    position: absolute;
 
     
-  a, .navbar-nav, .navdropdown {
+  a, .navbar-nav, .navdropdown, :link {
       font-family: 'Roboto Slab', serif;
       font-size: 16px; 
       color: #000;
+      margin-right: 20px;
       
       
 
@@ -29,10 +29,10 @@ const Menubar = styled.nav`
 const Header = () => {
 
     const [auth, setAuth] = useState();
-
+    
     useEffect(() => {
         setAuth(JSON.parse(sessionStorage.getItem('user')));
-    
+
     }, []);
 
 
@@ -44,23 +44,20 @@ const Header = () => {
         }
     }
 
-
-    return <Menubar>
+    return (
+        <Menubar>
             <Navbar bg="light" expand="lg">
                 <Navbar.Collapse >
                     <Nav className="ml-auto">
-                        <Nav.Link><Link to='/'>Home</Link></Nav.Link>
-                        <Nav.Link><Link to='/menu'>Menu</Link></Nav.Link>
-                        <Nav.Link><Link to='/booking'>Book a Table</Link></Nav.Link>
-                        <NavDropdown title="Order Online">
-                            <NavDropdown.Item><Link to='/takeout'>Takeout</Link></NavDropdown.Item>
-                            <NavDropdown.Item><Link to='/delivery'>Delivery</Link></NavDropdown.Item>
-                        </NavDropdown>
-                        <Nav.Link>{isAuth()}</Nav.Link>
+                        <Link to='/'>Home</Link>
+                        <Link to='/menu'>Menu</Link>
+                        <Link to='/booking'>Book a Table</Link>
+                        <Link to='/menu'>Order Online</Link>
+                        {isAuth()}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-        </Menubar>      
+        </Menubar>)
 }
 
 export default Header;

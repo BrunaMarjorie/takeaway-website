@@ -50,7 +50,7 @@ const Takeaway = () => {
             pair.push({ dish: dish, quantity: quantity });
             return pair;
         });
-        
+
         return data.setFieldValue('order', pair);
     }
 
@@ -71,7 +71,6 @@ const Takeaway = () => {
         <>
             <Header />
             <Container>
-                <Background />
                 <Content>
                     <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000', marginTop: '60px' }}>
                         {submit !== null &&
@@ -83,7 +82,7 @@ const Takeaway = () => {
                             <p>{data.errors.order}</p>)}
                     </div>
                     <form onSubmit={data.handleSubmit}>
-                        <h1>Ordering Takeaway: </h1>
+                        <h1>Ordering Delivery: </h1>
                         <DayPickerInput value={data.values.date} style={{ width: '100%' }}
                             formatDate={formatDate} format={FORMAT} dayPickerProps={{
                                 modifiers: {
@@ -99,12 +98,17 @@ const Takeaway = () => {
                         <input name='phoneNumber' type='text' placeholder='Phone number' value={data.values.phoneNumber} onChange={data.handleChange} />
                         {data.errors.phoneNumber && data.touched.phoneNumber && (
                             <p>{data.errors.phoneNumber}</p>)}
+                        <input name='address' type='text' placeholder='Address' value={data.values.address} onChange={data.handleChange} />
+                        {data.errors.address && data.touched.address && (
+                            <p>{data.errors.address}</p>)}
                         <input name='comment' type='text' placeholder='Comment' value={data.values.comment} onChange={data.handleChange} />
                         <button type='submit'> Order </button>
                     </form>
                     <Link to='/menu' style={{ color: '#0000FF' }}>Back to Menu</Link>
                 </Content>
+                <Background />
             </Container>
+
         </>
     )
 };

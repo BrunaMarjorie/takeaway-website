@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import api from '../../services/api';
-import { Redirect, useHistory } from "react-router-dom";
+import {useHistory } from "react-router-dom";
 
 
 const Form = (callback) => {

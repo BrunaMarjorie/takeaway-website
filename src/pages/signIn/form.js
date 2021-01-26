@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import api from '../../services/api';
-import { Redirect, useHistory, Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 
 const Form = (callback) => {
@@ -40,9 +40,14 @@ const Form = (callback) => {
             }
         } catch (e) {
             if (e.response) {
-                err = e.response.data;
-                const { error } = err;
-                setSubmit(error);
+                try{
+                    err = e.response.data;
+                    const { error } = err;
+                    setSubmit(error);
+                } catch (e) {
+                    setSubmit(e);
+                }
+                
             } else {
                 setSubmit("Some error has occured. Please try again.");
             }
