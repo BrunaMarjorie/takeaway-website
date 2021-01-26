@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bookings, Container, ContainerSec, Content, Takeaway } from './style';
 import Form from './form';
 import 'react-day-picker/lib/style.css';
@@ -6,8 +6,7 @@ import Header from '../../styles/header';
 import { Row, Col, Table } from 'reactstrap';
 import api from '../../services/api';
 import Order from './orders';
-
-
+import {Redirect} from 'react-router-dom';
 
 
 const Staff = () => {
@@ -18,6 +17,19 @@ const Staff = () => {
     const [takeaways, setTakeaways] = useState(null);
     const [deliveries, setDeliveries] = useState(null);
 
+    let user;
+
+    useEffect(() => {
+
+        user = JSON.parse(sessionStorage.getItem('user'));
+        
+        if (!user) {
+            return <Redirect to='/login' />
+
+        } else if (user.status === 'costumer') { 
+            return <Redirect to='/' />
+        }
+    }, []);
 
     const bookingsList = async () => {
         const result = await api.get('/bookings');

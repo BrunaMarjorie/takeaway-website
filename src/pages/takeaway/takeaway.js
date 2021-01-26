@@ -4,7 +4,7 @@ import Form from './form';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import dateFnsFormat from 'date-fns/format';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Header from '../../styles/header';
 
 
@@ -24,6 +24,11 @@ const Takeaway = () => {
 
         if (!order) {
             order = JSON.parse(localStorage.getItem('lastOrders'));
+        }
+
+        if (!user) {
+
+            return <Redirect to='/login' />
         }
 
         if (user.status === 'costumer') {
