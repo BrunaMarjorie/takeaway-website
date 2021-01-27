@@ -10,7 +10,7 @@ import Header from '../../styles/menuHeader';
 
 
 
-const Takeaway = () => {
+const Delivery = () => {
 
     let user;
 
@@ -116,4 +116,4 @@ const Takeaway = () => {
     )
 };
 
-export default Takeaway;
+export default Delivery;

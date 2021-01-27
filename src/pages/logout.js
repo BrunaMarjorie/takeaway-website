@@ -4,6 +4,8 @@ import { Redirect, useHistory } from "react-router-dom";
 const Logout = () => {
 
     sessionStorage.clear();
+    localStorage.removeItem('menuList');
+    localStorage.removeItem('orders');
 
     const history = useHistory();
 

@@ -5,7 +5,7 @@ import 'react-day-picker/lib/style.css';
 import Header from '../../styles/menuHeader';
 import api from '../../services/api';
 import Order from './orders';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Row, Col, Table } from 'react-bootstrap';
 
 
@@ -17,19 +17,15 @@ const Staff = () => {
     const [takeaways, setTakeaways] = useState(null);
     const [deliveries, setDeliveries] = useState(null);
 
-    let user;
+    const user = JSON.parse(sessionStorage.getItem('user'));
 
-    useEffect(() => {
+    if (!user) {
+        return <Redirect to='/login' />
 
-        user = JSON.parse(sessionStorage.getItem('user'));
-        
-        if (!user) {
-            return <Redirect to='/login' />
+    } else if (user.status === 'costumer') {
+        return <Redirect to='/' />
+    }
 
-        } else if (user.status === 'costumer') { 
-            return <Redirect to='/' />
-        }
-    }, []);
 
     const bookingsList = async () => {
         const result = await api.get('/bookings');
@@ -181,9 +177,9 @@ const Staff = () => {
                                     {takeaways &&
                                         takeaways.map((takeaway, key) => {
                                             return (
-                                                <tbody key={key}>
-                                                    <tr>
-                                                        <th><Order id={takeaway._id} /></th>
+                                                <tbody>
+                                                    <tr key={key}>
+                                                        <th><Order id={takeaway._id} type={'takeaway'} /></th>
                                                         <th style={{ fontWeight: '300' }}>{takeaway.costumer}</th>
                                                         <th style={{ fontWeight: '300' }}>{takeaway.time}</th>
                                                         <th style={{ fontWeight: '300' }}>{takeaway.paid}</th>
@@ -222,7 +218,7 @@ const Staff = () => {
                                             return (
                                                 <tbody>
                                                     <tr key={item}>
-                                                        <th><Order id={delivery._id} /></th>
+                                                        <th><Order id={delivery._id} type={'delivery'} /></th>
                                                         <th style={{ fontWeight: '300' }}>{delivery.address}</th>
                                                         <th style={{ fontWeight: '300' }}>{delivery.time}</th>
                                                         <th style={{ fontWeight: '300' }}>{delivery.paid}</th>

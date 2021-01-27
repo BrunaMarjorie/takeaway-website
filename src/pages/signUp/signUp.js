@@ -9,7 +9,7 @@ import { Row } from 'react-bootstrap';
 
 const SignUp = () => {
 
-    const { data, submit } = Form();
+    const { data, submit, loading } = Form();
 
     return (
         <Container>
@@ -37,14 +37,19 @@ const SignUp = () => {
                         <p>{data.errors.confPassword}</p>)}
                     <button type='submit'> Sign up </button>
                 </form>
-
-                <div>
-                    {submit !== null &&
-                        <p>{submit ? submit : null}</p>
+                <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000', marginTop: '15px' }}>
+                    {loading !== null &&
+                        <p>{loading ? loading : null}</p>
                     }
-                    <div>
-                        <Link to='/login'> <FiLogIn /> Log in </Link>
-                    </div>
+                </div>
+                <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000', marginTop: '15px' }}>
+                    {submit !== null &&
+                        <div>
+                            <p>{submit ? submit : null}</p>
+                            <Link to='/login'> <FiLogIn /> Log in </Link>
+                        </div>
+                    }
+
                 </div>
 
             </Content>

@@ -5,7 +5,8 @@ import api from '../../services/api';
 
 
 const Form = (callback) => {
-    const [submit, setSubmit] = useState(false);
+    const [submit, setSubmit] = useState(null);
+    const [loading, setLoading] = useState(null);
 
     const data = useFormik({
         initialValues: {
@@ -32,17 +33,19 @@ const Form = (callback) => {
 
 
     const createUser = async () => {
+        setLoading("Loading...");
         let err;
         try {
             const res = await api.post('/users/register', data.values);
+            setLoading(null);
             setSubmit("Account created successfully.");
         } catch (e) {
             if (e.response) {
                 err = e.response.data;
                 const { error } = err;
-                setSubmit(error);
+                setLoading(error);
             } else {
-                setSubmit("Some error has occured. Please try again.");
+                setLoading("Some error has occured. Please try again.");
             }
         }
     };
@@ -50,6 +53,7 @@ const Form = (callback) => {
     return {
         data,
         submit,
+        loading,
     }
 
 }

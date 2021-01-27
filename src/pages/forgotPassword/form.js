@@ -23,10 +23,15 @@ const Form = (callback) => {
     });
 
     const forgot = async () => {
+        setSubmit('Loading...');
         try {
             const res = await api.post('/forgot/password', data.values);
-            setSubmit("Please check your mailbox.");
-
+            console.log(res);
+            if (res.data.error) {
+                setSubmit(res.data.error); 
+             } else {
+                 setSubmit("Please check your mailbox.");
+             }
         } catch (e) {
             setSubmit("Some error has occured. Please try again.");
         }

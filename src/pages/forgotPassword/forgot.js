@@ -24,7 +24,7 @@ const SignIn = () => {
 
                     <button type='submit'> Send email </button>
                 </form>
-                <div>
+                <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000' }}>
                     {submit !== null &&
                         <p>{submit ? submit : null}</p>
                     }

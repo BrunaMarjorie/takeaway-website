@@ -3,6 +3,7 @@ import 'reactjs-popup/dist/index.css';
 import { Link } from 'react-router-dom';
 import { Modal, Button, Table, DropdownButton, Dropdown, ButtonGroup } from 'react-bootstrap';
 import { RiShoppingBasketLine } from 'react-icons/ri';
+import api from '../../services/api';
 
 
 const Basket = () => {
@@ -24,41 +25,54 @@ const Basket = () => {
         handleShow();
     }
 
-    const getLastOrder = async () => {
-        let order = await JSON.parse(localStorage.getItem('lastOrders'));
-        setOrders(order);
-        if (order) {
-            const total = order.reduce(function (tot, arr) {
-                return setTotalPrice(parseFloat(tot + arr.total).toFixed(2));
-            }, 0);
-        }
+    const getLastTakeaway = async () => {
+        setOrders([]);
+        setTotalPrice(null);
+        const user = await JSON.parse(sessionStorage.getItem('user'));
+        const order = await api.get(`/takeaway/lastorder/${user._id}`);
+        setOrders(order.data.order);
+        setTotalPrice(order.data.total);
+        handleShow();
+    }
+
+
+    const getLastDelivery = async () => {
+        setOrders([]);
+        setTotalPrice(null);
+        const user = await JSON.parse(sessionStorage.getItem('user'));
+        const order = await api.get(`/delivery/lastorder/${user._id}`);
+        setOrders(order.data.order);
+        setTotalPrice(order.data.total);
         handleShow();
     }
 
     const HandleOrders = () => {
-         return orders.map((order, key) => {
-                const price = parseFloat(order.price).toFixed(2);
-                const total = parseFloat(order.total).toFixed(2);
-                return (
-                    <tr key={key}>
-                        <td>{order.item}</td>
-                        <td>{order.dish}</td>
-                        <td>{order.quantity}</td>
-                        <td>{price}</td>
-                        <td>{total}</td>
-                    </tr>
-                )
-            })
+        return orders.map((order, key) => {
+            const price = parseFloat(order.price).toFixed(2);
+            let total = parseFloat(order.total).toFixed(2);
+            if (isNaN(total)) {
+                total = parseFloat(price * order.quantity).toFixed(2);
+            }
+            return (
+                <tr key={key}>
+                    <td>{order.item}</td>
+                    <td>{order.dish}</td>
+                    <td>{order.quantity}</td>
+                    <td>{price}</td>
+                    <td>{total}</td>
+                </tr>
+            )
+        })
     }
 
     const HandleEmptyBasket = () => {
         return (
-        <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        </tbody>)
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>)
     }
 
     const deleteOrder = () => {
@@ -97,14 +111,16 @@ const Basket = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <ButtonGroup>
-                    <Button variant="danger" onClick={deleteOrder} style={{marginRight: '50px'}}>
-                        Delete Order</Button>
-                    <Button variant="dark" onClick={getLastOrder} style={{marginRight: '50px'}} >
-                        See Last Order </Button>
-                    <DropdownButton variant="primary" title='Checkout' disabled={ orders ? false : true}>
-                        <Dropdown.Item> <Link to='/takeout'> Takeout </Link></Dropdown.Item>
-                        <Dropdown.Item> <Link to='/delivery'> Delivery </Link></Dropdown.Item>
-                    </DropdownButton>
+                        <Button variant="danger" onClick={deleteOrder} style={{ marginRight: '50px' }}>
+                            Delete Order</Button>
+                        <DropdownButton variant="info" title='See Last Order' style={{ marginRight: '50px' }}>
+                            <Dropdown.Item> <Button  variant="info" onClick={getLastTakeaway}> Takeout </Button></Dropdown.Item>
+                            <Dropdown.Item> <Button  variant="info" onClick={getLastDelivery}> Delivery </Button></Dropdown.Item>
+                        </DropdownButton>
+                        <DropdownButton variant="primary" title='Checkout' disabled={orders ? false : true}>
+                            <Dropdown.Item> <Link to='/takeout'> Takeout </Link></Dropdown.Item>
+                            <Dropdown.Item> <Link to='/delivery'> Delivery </Link></Dropdown.Item>
+                        </DropdownButton>
                     </ButtonGroup>
                 </Modal.Footer>
             </Modal>

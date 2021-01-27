@@ -1,13 +1,14 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 import 'reactjs-popup/dist/index.css';
 import { Modal, Button, Table, ButtonGroup, FormCheck } from 'react-bootstrap';
-import { FiEye } from 'react-icons/fi';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
 
 
 const Order = (props) => {
     const id = props.id;
+    const type = props.type;
+    
     const [show, setShow] = useState(false);
     const [orders, setOrders] = useState([]);
   
@@ -17,9 +18,18 @@ const Order = (props) => {
     
 
     const getOrder = async () => {
-        const result = await api.get(`/delivery/${id}`);
-        setOrders(result.data.deliveryList);
+        let result;
+        if (type === 'delivery') {
+            result = await api.get(`/delivery/${id}`);
+            setOrders(result.data.deliveryList);
+        }
+        if (type === 'takeaway') {
+            result = await api.get(`/takeaway/${id}`);
+            setOrders(result.data.takeawayList);
+        }
+                
         localStorage.removeItem('print');
+        console.log(result);
         handleShow();
     }
 
@@ -54,7 +64,7 @@ const Order = (props) => {
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>€ {price}</td>
+                        <td>€{price}</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -67,10 +77,13 @@ const Order = (props) => {
     }
 
     const HandleEmptyBasket = () => {
-        return (<tr>
+        return (
+        <tbody>
+            <tr>
             <td></td>
             <td></td>
-        </tr>)
+        </tr>
+        </tbody>)
     }
 
     const printOrder = async () => {

@@ -2,9 +2,8 @@ import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import { Button } from 'react-bootstrap';
 
-import { ComponentToPrint } from './invoice';
+import { ComponentToPrint } from './componentToPrint';
 
-import {  Test } from './test';
 
 const Printer = () => {
   const componentRef = useRef();

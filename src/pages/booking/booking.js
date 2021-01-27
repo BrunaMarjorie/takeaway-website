@@ -9,15 +9,14 @@ import Header from '../../styles/header';
 import { Row } from 'react-bootstrap';
 
 
-const Bookings = () => {
 
-    let user;
+const Bookings = (props) => {
+
+    const user = JSON.parse(sessionStorage.getItem('user'));
 
     const { data, submit } = Form();
 
     useEffect(() => {
-
-        user = JSON.parse(sessionStorage.getItem('user'));
 
         if (!user) {
             return <Redirect to='/login' />
@@ -28,9 +27,11 @@ const Bookings = () => {
             data.setFieldValue('email', user.email);
             if (user.phoneNumber) {
                 data.setFieldValue('phoneNumber', user.phoneNumber);
-            } else {
-                data.setFieldValue('user', user.email);
-            }
+            } 
+        }
+        else {
+            console.log('user:' + user.email);
+            data.setFieldValue('user', user.email);
         }
     }, []);
 

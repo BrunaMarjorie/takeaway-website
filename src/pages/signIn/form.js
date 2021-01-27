@@ -5,7 +5,9 @@ import api from '../../services/api';
 import { useHistory, Link } from "react-router-dom";
 
 
+
 const Form = (callback) => {
+
     const [submit, setSubmit] = useState(false);
     const history = useHistory();
 
@@ -30,7 +32,7 @@ const Form = (callback) => {
         setSubmit('Loading...');
         let err;
         try {
-            const res = await api.post('/users/login', data.values);
+            const res = await api.post('/login', data.values);
             sessionStorage.setItem('user', JSON.stringify(res.data));
             if (res.data.status === 'costumer'){
                 history.goBack();
