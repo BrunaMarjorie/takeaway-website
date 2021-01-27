@@ -8,7 +8,7 @@ import { shade } from 'polished';
 const Menubar = styled.nav`
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100vw;
     position: absolute;
 
     

@@ -9,7 +9,9 @@ const Homepage = () => {
   return (
       <Container>
         <Row>
+          <Col xs={12}>
           <Header />
+          </Col>
         </Row>
         <Content><h1>Welcome to Takeaway Restaurant</h1>
           <h3>Available for eating-in, takeaway and delivery</h3>

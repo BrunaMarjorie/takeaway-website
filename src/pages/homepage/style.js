@@ -3,7 +3,7 @@ import logo from '../../images/chinese.jpg';
 
 export const Container = styled.div`
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
     align-items: center;
-    width: 100%;
+    width: 100vw;
 
     h1 {
       margin-top: 200px;       
