@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Bookings, Container, ContainerSec, Content, Takeaway } from './style';
 import Form from './form';
 import 'react-day-picker/lib/style.css';
-import Header from '../../styles/header';
-import { Row, Col, Table } from 'reactstrap';
+import Header from '../../styles/menuHeader';
 import api from '../../services/api';
 import Order from './orders';
 import {Redirect} from 'react-router-dom';
+import { Row, Col, Table } from 'react-bootstrap';
 
 
 const Staff = () => {

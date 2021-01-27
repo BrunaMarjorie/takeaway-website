@@ -5,7 +5,8 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import dateFnsFormat from 'date-fns/format';
 import { Link, Redirect } from "react-router-dom";
-import Header from '../../styles/header';
+import Header from '../../styles/menuHeader';
+
 
 
 
@@ -55,7 +56,7 @@ const Takeaway = () => {
             pair.push({ dish: dish, quantity: quantity });
             return pair;
         });
-        
+
         return data.setFieldValue('order', pair);
     }
 
@@ -73,44 +74,42 @@ const Takeaway = () => {
     }
 
     return (
-        <>
+        <Container>
             <Header />
-            <Container>
-                <Background />
-                <Content>
-                    <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000', marginTop: '60px' }}>
-                        {submit !== null &&
-                            <p>{submit ? submit : null}</p>
-                        }
-                        {data.errors.user && data.touched.user && (
-                            <p>{data.errors.user}</p>)}
-                        {data.errors.order && data.touched.order && (
-                            <p>{data.errors.order}</p>)}
-                    </div>
-                    <form onSubmit={data.handleSubmit}>
-                        <h1>Ordering Takeaway: </h1>
-                        <DayPickerInput value={data.values.date} style={{ width: '100%' }}
-                            formatDate={formatDate} format={FORMAT} dayPickerProps={{
-                                modifiers: {
-                                    disabled: [{ daysOfWeek: [2] }, { before: new Date() }]
-                                }
-                            }}
-                            inputProps={{ readOnly: true }} onDayChange={handleDayChange} />
-                        {data.errors.date && data.touched.date && (
-                            <p>{data.errors.date}</p>)}
-                        <input name='name' type='text' placeholder='Name' value={data.values.name} onChange={data.handleChange} />
-                        {data.errors.name && data.touched.name && (
-                            <p>{data.errors.name}</p>)}
-                        <input name='phoneNumber' type='text' placeholder='Phone number' value={data.values.phoneNumber} onChange={data.handleChange} />
-                        {data.errors.phoneNumber && data.touched.phoneNumber && (
-                            <p>{data.errors.phoneNumber}</p>)}
-                        <input name='comment' type='text' placeholder='Comment' value={data.values.comment} onChange={data.handleChange} />
-                        <button type='submit'> Order </button>
-                    </form>
-                    <Link to='/menu' style={{ color: '#0000FF' }}>Back to Menu</Link>
-                </Content>
-            </Container>
-        </>
+            <Background />
+            <Content>
+                <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000', marginTop: '60px' }}>
+                    {submit !== null &&
+                        <p>{submit ? submit : null}</p>
+                    }
+                    {data.errors.user && data.touched.user && (
+                        <p>{data.errors.user}</p>)}
+                    {data.errors.order && data.touched.order && (
+                        <p>{data.errors.order}</p>)}
+                </div>
+                <form onSubmit={data.handleSubmit}>
+                    <h1>Ordering Takeaway: </h1>
+                    <DayPickerInput value={data.values.date} style={{ width: '100%' }}
+                        formatDate={formatDate} format={FORMAT} dayPickerProps={{
+                            modifiers: {
+                                disabled: [{ daysOfWeek: [2] }, { before: new Date() }]
+                            }
+                        }}
+                        inputProps={{ readOnly: true }} onDayChange={handleDayChange} />
+                    {data.errors.date && data.touched.date && (
+                        <p>{data.errors.date}</p>)}
+                    <input name='name' type='text' placeholder='Name' value={data.values.name} onChange={data.handleChange} />
+                    {data.errors.name && data.touched.name && (
+                        <p>{data.errors.name}</p>)}
+                    <input name='phoneNumber' type='text' placeholder='Phone number' value={data.values.phoneNumber} onChange={data.handleChange} />
+                    {data.errors.phoneNumber && data.touched.phoneNumber && (
+                        <p>{data.errors.phoneNumber}</p>)}
+                    <input name='comment' type='text' placeholder='Comment' value={data.values.comment} onChange={data.handleChange} />
+                    <button type='submit'> Order </button>
+                </form>
+                <Link to='/menu' style={{ color: '#0000FF' }}>Back to Menu</Link>
+            </Content>
+        </Container>
     )
 };
 

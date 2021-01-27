@@ -6,32 +6,34 @@ import 'react-day-picker/lib/style.css';
 import dateFnsFormat from 'date-fns/format';
 import { Redirect } from "react-router-dom";
 import Header from '../../styles/header';
+import { Row } from 'react-bootstrap';
 
 
 const Bookings = () => {
 
-    let user; 
+    let user;
 
     const { data, submit } = Form();
 
     useEffect(() => {
 
         user = JSON.parse(sessionStorage.getItem('user'));
-        
+
         if (!user) {
             return <Redirect to='/login' />
 
-        } else if (user.status === 'costumer') { 
-            data.setFieldValue('user', user.email);          
+        } else if (user.status === 'costumer') {
+            data.setFieldValue('user', user.email);
             data.setFieldValue('name', user.name);
             data.setFieldValue('email', user.email);
             if (user.phoneNumber) {
-            data.setFieldValue('phoneNumber', user.phoneNumber);
-        } else {
-            data.setFieldValue('user', user.email); 
-        }}
+                data.setFieldValue('phoneNumber', user.phoneNumber);
+            } else {
+                data.setFieldValue('user', user.email);
+            }
+        }
     }, []);
-        
+
 
     function formatDate(date, format, locale) {
         return dateFnsFormat(date, format, { locale });
@@ -40,18 +42,19 @@ const Bookings = () => {
 
 
     function handleDayChange(day) {
-        let selectedDay = new Date (day);
-        selectedDay = selectedDay.getFullYear()+'/'+selectedDay.getMonth()+1+'/'+selectedDay.getDate();
+        let selectedDay = new Date(day);
+        selectedDay = selectedDay.getFullYear() + '/' + selectedDay.getMonth() + 1 + '/' + selectedDay.getDate();
         data.setFieldValue('date', selectedDay);
     }
 
     return (
-        <>
-        <Header />
         <Container>
-            <Background/>
+            <Row >
+                <Header />
+            </Row>
+            <Background />
             <Content>
-            <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000' }}>
+                <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000' }}>
                     {submit !== null &&
                         <p>{submit ? submit : null}</p>
                     }
@@ -98,7 +101,6 @@ const Bookings = () => {
                 </form>
             </Content>
         </Container>
-        </>
     )
 };
 

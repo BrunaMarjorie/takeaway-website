@@ -52,10 +52,13 @@ const Basket = () => {
     }
 
     const HandleEmptyBasket = () => {
-        return (<tr>
+        return (
+        <tbody>
+        <tr>
             <td></td>
             <td></td>
-        </tr>)
+        </tr>
+        </tbody>)
     }
 
     const deleteOrder = () => {
@@ -67,7 +70,7 @@ const Basket = () => {
     return (
         <>
             <Button variant="primary" onClick={getOrders}>
-                <RiShoppingBasketLine style={{ marginBottom: '5px' }} />  See Basket
+                <RiShoppingBasketLine style={{ marginBottom: '5px' }} />  Basket
         </Button>
 
             <Modal show={show} onHide={handleClose} size='lg'>

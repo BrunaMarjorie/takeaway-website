@@ -2,6 +2,7 @@ import React from 'react';
 import { Background, Container, Content } from './style';
 import Form from './form';
 import Header from '../../styles/header';
+import { Row } from 'react-bootstrap';
 
 
 const SignIn = () => {
@@ -9,9 +10,10 @@ const SignIn = () => {
 
 
     return (
-        <>
-        <Header />
         <Container>
+            <Row >
+                <Header />
+            </Row>
             <Content>
                 <form onSubmit={data.handleSubmit}>
                     <h1>Reset your password</h1>
@@ -30,7 +32,6 @@ const SignIn = () => {
             </Content>
             <Background />
         </Container>
-        </>
     )
 };
 

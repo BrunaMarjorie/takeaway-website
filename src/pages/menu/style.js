@@ -8,7 +8,7 @@ export const Container = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     max-width: 100%;
-    scroll-padding: 1000px;
+    scroll-padding: 1200px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${logo});
     background-size: cover;
 `;
@@ -17,10 +17,10 @@ export const Container = styled.div`
 export const Content = styled.div`
     display: flex;
     flex-direction: row;
-    height: 78vh;
+    height: 80vh;
     width: 100%;
     max-width:900px;
-    margin-top: 60px;
+    margin-top: 80px;
     background-color: #DDD8D7;
     text-align: center;
     line-height: 20px;    
@@ -56,7 +56,7 @@ export const Button = styled.div`
     height: 1vh;
     width: 100%;
     max-width:900px;
-    margin-top: 60px;
+    margin-top: 30px;
     text-align: center;
     line-height: 20px;    
 

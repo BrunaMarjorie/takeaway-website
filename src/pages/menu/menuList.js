@@ -1,11 +1,10 @@
 import React from 'react';
-import { Container, Content, Title, Button } from '../menu/style';
+import { Container, Content, Title } from '../menu/style';
 import 'bootstrap-css-only/css/bootstrap.min.css';
-import { Table} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { Redirect } from "react-router-dom";
-import Header from '../../styles/header';
+import Header from '../../styles/menuHeader';
 import Form from './form';
-import Basket from './basket';
 
 
 
@@ -30,7 +29,7 @@ const Menu = () => {
         const ingredients = item.ingredients;
         let ingList = '';
         ingredients.map((ing, index) => {
-           return ingList += ing + ", ";
+          return ingList += ing + ", ";
         });
         let allergens = "";
         if (item.allergens[0]) {
@@ -75,7 +74,7 @@ const Menu = () => {
       orders.push(order)
       localStorage.setItem('orders', JSON.stringify(orders));
       alert('Item added to the basket!');
-      
+
     }
 
   }
@@ -83,85 +82,80 @@ const Menu = () => {
 
 
   return (
-    <>
+    <Container>
       <Header />
-      <Container>
-        <Button>
-          <Basket />
-        </Button>
-        <Content>
-          <Table responsive>
-            <thead>
-              <tr>
-                <th style={{ width: '80px' }}>Quantity</th>
-                <th style={{ width: '80px' }}>Item</th>
-                <th style={{ width: '400px' }}>Description</th>
-                <th style={{ width: '100px' }}>Price (€)</th>
-                <th style={{ width: '120px' }}></th>
-              </tr>
-            </thead>
-            <tbody>
-              <Title>
-                <td></td>
-                <td></td>
-                <td > Soups </td>
-                <td></td>
-                <td></td>
-              </Title>
-              {types('soup')}
-              <Title>
-                <td></td>
-                <td></td>
-                <td > Starters </td>
-                <td></td>
-                <td></td>
-              </Title>
-              {types('starter')}
-              <Title>
-                <td></td>
-                <td></td>
-                <td > Satay </td>
-                <td></td>
-                <td></td>
-              </Title>
-              {types('satay')}
-              <Title>
-                <td></td>
-                <td></td>
-                <td > Curry </td>
-                <td></td>
-                <td></td>
-              </Title>
-              {types('curry')}
-              <Title>
-                <td></td>
-                <td></td>
-                <td > Rice </td>
-                <td></td>
-                <td></td>
-              </Title>
-              {types('rice')}
-              <Title>
-                <td></td>
-                <td></td>
-                <td > Chow Mein </td>
-                <td></td>
-                <td></td>
-              </Title>
-              {types('mein')}
-              <Title>
-                <td></td>
-                <td></td>
-                <td > Sides </td>
-                <td></td>
-                <td></td>
-              </Title>
-              {types('side')}
-            </tbody>
-          </Table>
-        </Content>
-      </Container>
-    </>
+      <Content>
+        <Table responsive striped bordered hover>
+          <thead>
+            <tr>
+              <th style={{ width: '80px' }}>Quantity</th>
+              <th style={{ width: '80px' }}>Item</th>
+              <th style={{ width: '400px' }}>Description</th>
+              <th style={{ width: '100px' }}>Price (€)</th>
+              <th style={{ width: '120px' }}></th>
+            </tr>
+          </thead>
+          <tbody>
+            <Title>
+              <td></td>
+              <td></td>
+              <td > Soups </td>
+              <td></td>
+              <td></td>
+            </Title>
+            {types('soup')}
+            <Title>
+              <td></td>
+              <td></td>
+              <td > Starters </td>
+              <td></td>
+              <td></td>
+            </Title>
+            {types('starter')}
+            <Title>
+              <td></td>
+              <td></td>
+              <td > Satay </td>
+              <td></td>
+              <td></td>
+            </Title>
+            {types('satay')}
+            <Title>
+              <td></td>
+              <td></td>
+              <td > Curry </td>
+              <td></td>
+              <td></td>
+            </Title>
+            {types('curry')}
+            <Title>
+              <td></td>
+              <td></td>
+              <td > Rice </td>
+              <td></td>
+              <td></td>
+            </Title>
+            {types('rice')}
+            <Title>
+              <td></td>
+              <td></td>
+              <td > Chow Mein </td>
+              <td></td>
+              <td></td>
+            </Title>
+            {types('mein')}
+            <Title>
+              <td></td>
+              <td></td>
+              <td > Sides </td>
+              <td></td>
+              <td></td>
+            </Title>
+            {types('side')}
+          </tbody>
+        </Table>
+      </Content>
+    </Container>
   )
 };
 
