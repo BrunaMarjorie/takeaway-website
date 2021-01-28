@@ -50,7 +50,7 @@ const Menu = () => {
               </div>
             </td>
             <td>{price}</td>
-            <td><button type='submit' onClick={() => takeaway(item.number, item.dish, data.values.quantity, item.price, item._id)}>Add to Cart</button></td>
+            <td><button style={{fontWeight: 'bold'}} type='submit' onClick={() => takeaway(item.number, item.dish, data.values.quantity, item.price, item._id)}>Add to Cart</button></td>
           </tr>
         )
       }

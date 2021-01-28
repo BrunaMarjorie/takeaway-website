@@ -10,6 +10,7 @@ const Basket = () => {
     const [show, setShow] = useState(false);
     const [orders, setOrders] = useState([]);
     const [totalPrice, setTotalPrice] = useState();
+    const [user, setUser] = useState();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -22,24 +23,27 @@ const Basket = () => {
                 return setTotalPrice(parseFloat(tot + arr.total).toFixed(2));
             }, 0);
         }
+        const user = await JSON.parse(sessionStorage.getItem('user'));
+        if(user) {
+            setUser(user);
+        }
         handleShow();
     }
 
     const getLastTakeaway = async () => {
         setOrders([]);
         setTotalPrice(null);
-        const user = await JSON.parse(sessionStorage.getItem('user'));
         const order = await api.get(`/takeaway/lastorder/${user._id}`);
         setOrders(order.data.order);
         setTotalPrice(order.data.total);
         handleShow();
+
     }
 
 
     const getLastDelivery = async () => {
         setOrders([]);
         setTotalPrice(null);
-        const user = await JSON.parse(sessionStorage.getItem('user'));
         const order = await api.get(`/delivery/lastorder/${user._id}`);
         setOrders(order.data.order);
         setTotalPrice(order.data.total);
@@ -84,7 +88,7 @@ const Basket = () => {
     return (
         <>
             <Button variant="primary" onClick={getOrders}>
-                <RiShoppingBasketLine style={{ marginBottom: '5px' }} />  Basket
+                <RiShoppingBasketLine style={{ marginBottom: '3px' }} />  Basket
         </Button>
 
             <Modal show={show} onHide={handleClose} size='lg'>
@@ -113,9 +117,9 @@ const Basket = () => {
                     <ButtonGroup>
                         <Button variant="danger" onClick={deleteOrder} style={{ marginRight: '50px' }}>
                             Delete Order</Button>
-                        <DropdownButton variant="info" title='See Last Order' style={{ marginRight: '50px' }}>
-                            <Dropdown.Item> <Button  variant="info" onClick={getLastTakeaway}> Takeout </Button></Dropdown.Item>
-                            <Dropdown.Item> <Button  variant="info" onClick={getLastDelivery}> Delivery </Button></Dropdown.Item>
+                        <DropdownButton variant="info" title='See Last Order' style={{ marginRight: '50px' }} disabled={user ? false : true}>
+                            <Dropdown.Item> <Button variant="info" onClick={getLastTakeaway}> Takeout </Button></Dropdown.Item>
+                            <Dropdown.Item> <Button variant="info" onClick={getLastDelivery}> Delivery </Button></Dropdown.Item>
                         </DropdownButton>
                         <DropdownButton variant="primary" title='Checkout' disabled={orders ? false : true}>
                             <Dropdown.Item> <Link to='/takeout'> Takeout </Link></Dropdown.Item>

@@ -52,9 +52,10 @@ const Button = styled.div`
 
 `;
 
-const Header = () => {
+const Header = (props) => {
 
     const [auth, setAuth] = useState();
+    const status = props.user;
 
     useEffect(() => {
         setAuth(JSON.parse(sessionStorage.getItem('user')));
@@ -70,6 +71,15 @@ const Header = () => {
         }
     }
 
+    const isStaff = () => {
+        if (auth && !status) {
+            return <Link to='/staffpage'>Staff Page</Link>;
+        } else {
+            return null;
+        }
+    }
+
+
     return (
         <Menubar>
             <Navbar bg="light" expand="lg">
@@ -79,6 +89,7 @@ const Header = () => {
                         <Link to='/menu'>Menu</Link>
                         <Link to='/booking'>Book a Table</Link>
                         <Button> <Basket /> </Button>
+                        {isStaff()}
                         {isAuth()}
                     </Nav>
                 </Navbar.Collapse>

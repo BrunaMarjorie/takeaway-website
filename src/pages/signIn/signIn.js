@@ -10,13 +10,14 @@ import { Row } from 'react-bootstrap';
 
 const SignIn = () => {
 
-    const { data, submit } = Form();
+    const { data, submit, user } = Form();
 
-    
+    const logged = user;
+
     return (
         <Container>
             <Row >
-                <Header />
+                <Header user={logged}/>
             </Row>
             <Content>
                 <form onSubmit={data.handleSubmit}>

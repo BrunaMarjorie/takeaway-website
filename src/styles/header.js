@@ -27,21 +27,31 @@ const Menubar = styled.nav`
   }
 `;
 
-const Header = () => {
+const Header = (props) => {
 
     const [auth, setAuth] = useState();
     
+    const status = props.user;
+
     useEffect(() => {
         setAuth(JSON.parse(sessionStorage.getItem('user')));
 
     }, []);
 
-
+ 
     const isAuth = () => {
         if (!auth) {
             return <Link to='/login'>Login</Link>
         } else {
             return <Link to='/logout'>{auth.name}(Logout)</Link>
+        }
+    }
+
+    const isStaff = () => {
+        if (auth && !status) {
+            return <Link to='/staffpage'>Staff Page</Link>;
+        } else {
+            return null;
         }
     }
 
@@ -53,6 +63,7 @@ const Header = () => {
                         <Link to='/'>Home</Link>
                         <Link to='/menu'>Menu</Link>
                         <Link to='/booking'>Book a Table</Link>
+                        {isStaff()}
                         {isAuth()}
                     </Nav>
                 </Navbar.Collapse>

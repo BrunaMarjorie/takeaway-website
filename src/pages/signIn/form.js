@@ -5,10 +5,9 @@ import api from '../../services/api';
 import { useHistory, Link } from "react-router-dom";
 
 
-
 const Form = (callback) => {
-
     const [submit, setSubmit] = useState(false);
+    const [user, setUser] = useState();
     const history = useHistory();
 
     const data = useFormik({
@@ -32,12 +31,14 @@ const Form = (callback) => {
         setSubmit('Loading...');
         let err;
         try {
-            const res = await api.post('/login', data.values);
+            const res = await api.post('/users/login', data.values);
             sessionStorage.setItem('user', JSON.stringify(res.data));
             if (res.data.status === 'costumer'){
+                setUser('costumer');
                 history.goBack();
             
             } else {
+                history.go(0);
                 setSubmit(<Link to='/staffpage'>Staff page</Link> );
             }
         } catch (e) {
@@ -59,7 +60,8 @@ const Form = (callback) => {
 
     return {
         data,
-        submit
+        submit,
+        user,
     }
 
 }

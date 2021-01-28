@@ -56,9 +56,9 @@ export const Button = styled.div`
     height: 1vh;
     width: 100%;
     max-width:900px;
-    margin-top: 30px;
+    margin-top: 10px;
     text-align: center;
-    line-height: 20px;    
+    line-height: 10px;    
 
 
     button, .dropdown-button {

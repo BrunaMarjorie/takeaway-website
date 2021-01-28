@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Redirect, useHistory } from "react-router-dom";
+import api from '../services/api';
 
 const Logout = () => {
 
@@ -11,6 +12,7 @@ const Logout = () => {
 
     useEffect(() => {
         history.go(0);
+
     }, [])
       
 
