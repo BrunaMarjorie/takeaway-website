@@ -16,7 +16,7 @@ const Calendar = (callback) => {
             name: '',
             email: '',
             phoneNumber: '',
-            user: '',
+            userID: '',
         },
 
         validationSchema: Yup.object().shape({

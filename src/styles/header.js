@@ -30,15 +30,14 @@ const Menubar = styled.nav`
 const Header = (props) => {
 
     const [auth, setAuth] = useState();
-    
-    const status = props.user;
+    const [userStatus, setUserStatus] = useState();
 
     useEffect(() => {
         setAuth(JSON.parse(sessionStorage.getItem('user')));
 
     }, []);
 
- 
+
     const isAuth = () => {
         if (!auth) {
             return <Link to='/login'>Login</Link>
@@ -48,16 +47,22 @@ const Header = (props) => {
     }
 
     const isStaff = () => {
-        if (auth && !status) {
-            return <Link to='/staffpage'>Staff Page</Link>;
-        } else {
-            return null;
+        if (auth) {
+            const status = auth.status;
+            if (status) {
+                if (status === 'staff' || status === 'admin') {
+                    return <Link to='/staffpage'>Staff Page</Link>;
+                } else {
+                    return null;
+                }
+            }
         }
     }
 
     return (
         <Menubar>
             <Navbar bg="light" expand="lg">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse >
                     <Nav className="ml-auto">
                         <Link to='/'>Home</Link>

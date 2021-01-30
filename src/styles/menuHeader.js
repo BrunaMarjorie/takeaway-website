@@ -83,6 +83,7 @@ const Header = (props) => {
     return (
         <Menubar>
             <Navbar bg="light" expand="lg">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse >
                     <Nav className="ml-auto">
                         <Link to='/'>Home</Link>

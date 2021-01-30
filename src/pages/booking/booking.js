@@ -18,10 +18,7 @@ const Bookings = (props) => {
 
     useEffect(() => {
 
-        if (!user) {
-            return <Redirect to='/login' />
-
-        } else if (user.status === 'costumer') {
+        if (user.status === 'costumer') {
             data.setFieldValue('user', user.email);
             data.setFieldValue('name', user.name);
             data.setFieldValue('email', user.email);
@@ -30,8 +27,7 @@ const Bookings = (props) => {
             } 
         }
         else {
-            console.log('user:' + user.email);
-            data.setFieldValue('user', user.email);
+            data.setFieldValue('userID', user._id);
         }
     }, []);
 

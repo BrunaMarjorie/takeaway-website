@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Bookings, Container, ContainerSec, Content, Takeaway } from './style';
 import Form from './form';
 import 'react-day-picker/lib/style.css';
@@ -19,13 +19,15 @@ const Staff = () => {
 
     const user = JSON.parse(sessionStorage.getItem('user'));
 
-    if (!user) {
-        return <Redirect to='/login' />
-
-    } else if (user.status === 'costumer') {
-        return <Redirect to='/' />
+    const waitingTime = async() => {
+        const res = await api.get('/waitingTime');
+        data.setFieldValue('takeaway', res.data.takeawayTime);
+        data.setFieldValue('delivery', res.data.deliveryTime);
     }
 
+    if (user.status === 'costumer') {
+        return <Redirect to='/' />
+    } 
 
     const bookingsList = async () => {
         const result = await api.get('/bookings');
@@ -63,45 +65,38 @@ const Staff = () => {
                     <ContainerSec>
                         <Row>
                             <Content>
-                                <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000' }}>
-                                    {submit !== null &&
-                                        <p>{submit ? submit : null}</p>
-                                    }
-                                    {data.errors.user && data.touched.user && (
-                                        <p>{data.errors.user}</p>)}
-                                </div>
                                 <form onSubmit={data.handleSubmit}>
                                     <h1>Time: </h1>
                                     <label> Takeaway time:
-                                <select name='time'
-                                            value={data.values.time}
+                                <select name='takeaway'
+                                            value={data.values.takeaway}
                                             onChange={data.handleChange}
                                             onBlur={data.handleBlur}>
-                                            <option value='15' label='15min' />
-                                            <option value='20' label='20min' />
-                                            <option value='25' label='25min' />
-                                            <option value='30' label='30min' />
-                                            <option value='35' label='35min' />
-                                            <option value='40' label='40min' />
-                                            <option value='45' label='45min' />
-                                            <option value='50' label='50min' />
-                                            <option value='55' label='55min' />
-                                            <option value='60' label='60min' />
+                                            <option value='15min' label='15min' />
+                                            <option value='20min' label='20min' />
+                                            <option value='25min' label='25min' />
+                                            <option value='30min' label='30min' />
+                                            <option value='35min' label='35min' />
+                                            <option value='40min' label='40min' />
+                                            <option value='45min' label='45min' />
+                                            <option value='50min' label='50min' />
+                                            <option value='55min' label='55min' />
+                                            <option value='60min' label='60min' />
                                         </select>
                                     </label>
                                     <label>
                                         Delivery time:
-                            <select name='time'
-                                            value={data.values.time}
+                            <select name='delivery'
+                                            value={data.values.delivery}
                                             onChange={data.handleChange}
                                             onBlur={data.handleBlur}>
-                                            <option value='30' label='30min' />
-                                            <option value='40' label='40min' />
-                                            <option value='45' label='45min' />
-                                            <option value='50' label='50min' />
-                                            <option value='60' label='60min' />
-                                            <option value='80' label='80min' />
-                                            <option value='90' label='90min' />
+                                            <option value='30min' label='30min' />
+                                            <option value='40min' label='40min' />
+                                            <option value='45min' label='45min' />
+                                            <option value='50min' label='50min' />
+                                            <option value='60min' label='60min' />
+                                            <option value='80min' label='80min' />
+                                            <option value='90min' label='90min' />
                                         </select>
                                     </label>
                                     <button type='submit'> Update </button>

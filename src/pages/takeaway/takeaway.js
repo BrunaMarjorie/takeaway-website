@@ -33,7 +33,6 @@ const Takeaway = () => {
         }
 
         if (user.status === 'costumer') {
-            data.setFieldValue('user', user.email);
             data.setFieldValue('name', user.name);
             data.setFieldValue('email', user.email);
             if (user.phoneNumber) {
