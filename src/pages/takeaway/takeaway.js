@@ -27,12 +27,7 @@ const Takeaway = () => {
             order = JSON.parse(localStorage.getItem('lastOrders'));
         }
 
-        if (!user) {
-
-            return <Redirect to='/login' />
-        }
-
-        if (user.status === 'costumer') {
+        if (user.status === 'customer') {
             data.setFieldValue('name', user.name);
             data.setFieldValue('email', user.email);
             if (user.phoneNumber) {

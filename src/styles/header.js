@@ -30,7 +30,7 @@ const Menubar = styled.nav`
 const Header = (props) => {
 
     const [auth, setAuth] = useState();
-    const [userStatus, setUserStatus] = useState();
+    
 
     useEffect(() => {
         setAuth(JSON.parse(sessionStorage.getItem('user')));

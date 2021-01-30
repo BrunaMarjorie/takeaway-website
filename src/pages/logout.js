@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Redirect, useHistory } from "react-router-dom";
-import api from '../services/api';
+
 
 const Logout = () => {
 

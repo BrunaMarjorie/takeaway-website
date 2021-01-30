@@ -66,12 +66,12 @@ const Invoice = () => {
     };
 
 
-    function PrintCostumer() {
+    function PrintCustomer() {
         return invoice.map((value, key) => {
             const address = value.address;
             return (
                 <div>
-                    <p style={{width: '350px'}}>Name: {value.costumer}</p>
+                    <p style={{width: '350px'}}>Name: {value.customer}</p>
                     <p style={{width: '350px'}}>Phone Number: {value.phoneNumber}</p>
                     {address !== null &&
                         <p style={{width: '350px'}}>Address: {address ? address : null}</p>
@@ -109,7 +109,7 @@ const Invoice = () => {
                     <Row>
                         <Col>
                             <h3>Bill to:</h3>
-                            {invoice && invoice.length > 0 ? <PrintCostumer /> : null }
+                            {invoice && invoice.length > 0 ? <PrintCustomer /> : null }
                             
                         </Col>
                     </Row>

@@ -6,6 +6,8 @@ import { Row } from 'react-bootstrap';
 
 
 const SignIn = () => {
+
+    //formik form
     const { data, submit } = Form();
 
 
@@ -17,14 +19,21 @@ const SignIn = () => {
             <Content>
                 <form onSubmit={data.handleSubmit}>
                     <h1>Reset your password</h1>
-                    <p style={{ textAlign: 'center', color: '#312e38', fontWeight: '500', fontSize: '14px' }}>Enter your user email address and we will send you a link to reset your password. </p>
-                    <input name='email' type='text' placeholder='E-mail' value={data.values.email} onChange={data.handleChange} />
+                    <p style={{ textAlign: 'center', color: '#312e38', 
+                    fontWeight: '500', fontSize: '14px' }}>
+                        Enter your user email address and we will send you a 
+                        link to reset your password. </p>
+                    {/* collect user email  */}
+                    <input name='email' type='text' placeholder='E-mail' 
+                    value={data.values.email} onChange={data.handleChange} />
+                    {/* display errors messages  */}
                     {data.errors.email && data.touched.email && (
                         <p>{data.errors.email}</p>)}
 
                     <button type='submit'> Send email </button>
                 </form>
                 <div style={{ textAlign: 'center', fontSize: '16px', fontWeight: 'bold', color: '#8B0000' }}>
+                    {/* display loading message and errors  */}
                     {submit !== null &&
                         <p>{submit ? submit : null}</p>
                     }

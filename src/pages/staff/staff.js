@@ -11,48 +11,57 @@ import { Row, Col, Table } from 'react-bootstrap';
 
 const Staff = () => {
 
-    const { data, submit } = Form();
+    //formik form
+    const { data } = Form();
 
     const [bookings, setBookings] = useState(null);
     const [takeaways, setTakeaways] = useState(null);
     const [deliveries, setDeliveries] = useState(null);
 
+    //collect user information
     const user = JSON.parse(sessionStorage.getItem('user'));
 
-    const waitingTime = async() => {
+    //collect waiting time information
+    const waitingTime = async () => {
         const res = await api.get('/waitingTime');
         data.setFieldValue('takeaway', res.data.takeawayTime);
         data.setFieldValue('delivery', res.data.deliveryTime);
     }
 
-    if (user.status === 'costumer') {
+    //redirect if user is a customer 
+    if (user.status === 'customer') {
         return <Redirect to='/' />
-    } 
+    }
 
+    //call API to get all the bookings
     const bookingsList = async () => {
         const result = await api.get('/bookings');
         setBookings(result.data.bookings);
     }
 
+    //call API to get all the takeout orders
     const takeawayList = async () => {
         const result = await api.get('/takeaway');
         setTakeaways(result.data.takeawayList);
     }
 
+    //call API to get all the delivery orders
     const deliveryList = async () => {
         const result = await api.get('/delivery');
-        console.log(result);
         setDeliveries(result.data.deliveryList);
     }
 
+    //close bookings view
     const retrieveBooking = () => {
         setBookings(null);
     }
 
+    //close takeaway view
     const retrieveTakeaway = () => {
         setTakeaways(null);
     }
 
+    //close delivery view
     const retrieveDelivery = () => {
         setDeliveries(null);
     }
@@ -68,7 +77,8 @@ const Staff = () => {
                                 <form onSubmit={data.handleSubmit}>
                                     <h1>Time: </h1>
                                     <label> Takeaway time:
-                                <select name='takeaway'
+                                        {/* select waiting time for takeaway  */}
+                                        <select name='takeaway'
                                             value={data.values.takeaway}
                                             onChange={data.handleChange}
                                             onBlur={data.handleBlur}>
@@ -86,7 +96,8 @@ const Staff = () => {
                                     </label>
                                     <label>
                                         Delivery time:
-                            <select name='delivery'
+                                        {/* select waiting time for delivery  */}
+                                        <select name='delivery'
                                             value={data.values.delivery}
                                             onChange={data.handleChange}
                                             onBlur={data.handleBlur}>
@@ -108,13 +119,15 @@ const Staff = () => {
                                 <form>
                                     <h1>Bookings </h1>
                                     <Row>
+                                        {/* get bookings  */}
                                         <button type='button' onClick={bookingsList}>
                                             Bookings </button>
+                                        {/* retrieve bookings  */}
                                         <button type='button' onClick={retrieveBooking}>
                                             Retrieve </button>
 
                                     </Row>
-
+                                    {/* display bookings  */}
                                     <div style={{ overflow: 'auto', maxHeight: '200px' }}>
                                         <Table style={{ maxWidth: '350px', marginLeft: '10px', fontSize: '14px' }}>
                                             <thead>
@@ -125,6 +138,7 @@ const Staff = () => {
                                                     <th style={{ width: '5px' }}>People</th>
                                                 </tr>
                                             </thead>
+                                            {/* iterate through bookings array  */}
                                             {bookings &&
                                                 bookings.map((booking, index) => {
                                                     let date = new Date(booking.date);
@@ -154,11 +168,14 @@ const Staff = () => {
                         <form>
                             <h1>Takeaway</h1>
                             <Row>
+                                {/* get takeout orders  */}
                                 <button type='button' onClick={takeawayList}>
                                     Orders </button>
+                                {/* retrieve takeout orders  */}
                                 <button type='button' onClick={retrieveTakeaway}>
                                     Retrieve </button>
                             </Row>
+                            {/* display orders  */}
                             <div style={{ overflow: 'auto', maxHeight: '350px' }}>
                                 <Table style={{ width: '100%', maxWidth: '500px', fontSize: '14px' }}>
                                     <thead>
@@ -169,13 +186,14 @@ const Staff = () => {
                                             <th style={{ width: '150px' }}>Paid</th>
                                         </tr>
                                     </thead>
+                                    {/* iterate through takeaway array  */}
                                     {takeaways &&
                                         takeaways.map((takeaway, key) => {
                                             return (
                                                 <tbody>
                                                     <tr key={key}>
                                                         <th><Order id={takeaway._id} type={'takeaway'} /></th>
-                                                        <th style={{ fontWeight: '300' }}>{takeaway.costumer}</th>
+                                                        <th style={{ fontWeight: '300' }}>{takeaway.customer}</th>
                                                         <th style={{ fontWeight: '300' }}>{takeaway.time}</th>
                                                         <th style={{ fontWeight: '300' }}>{takeaway.paid}</th>
                                                     </tr>
@@ -193,11 +211,14 @@ const Staff = () => {
                         <form>
                             <h1>Delivery</h1>
                             <Row>
+                                {/* get delivery orders  */}
                                 <button type='button' onClick={deliveryList}>
                                     Orders </button>
+                                {/* retrieve delivery orders  */}
                                 <button type='button' onClick={retrieveDelivery}>
                                     Retrieve </button>
                             </Row>
+                            {/* display delivery orders  */}
                             <div style={{ overflow: 'auto', maxHeight: '350px' }}>
                                 <Table style={{ width: '100%', maxWidth: '500px', fontSize: '14px' }}>
                                     <thead>
@@ -208,6 +229,7 @@ const Staff = () => {
                                             <th style={{ width: '150px' }}>Paid</th>
                                         </tr>
                                     </thead>
+                                    {/* iterate through delivery array  */}
                                     {deliveries &&
                                         deliveries.map((delivery, item) => {
                                             return (

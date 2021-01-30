@@ -8,6 +8,7 @@ const Form = (callback) => {
     const [submit, setSubmit] = useState(null);
     const [loading, setLoading] = useState(null);
 
+    //set inicial values
     const data = useFormik({
         initialValues: {
             name: '',
@@ -17,6 +18,7 @@ const Form = (callback) => {
             confPassword: ''
         },
 
+        //validate inputs
         validationSchema: Yup.object().shape({
             name: Yup.string().min(2, 'Minimum 2 characters').required('Name is required'),
             phoneNumber: Yup.number().required('Phone number is required'),
@@ -26,6 +28,7 @@ const Form = (callback) => {
         }),
 
         onSubmit: values => {
+            //create user if all information is correctly passed
             createUser();
         }
 
@@ -33,18 +36,23 @@ const Form = (callback) => {
 
 
     const createUser = async () => {
+        //set loading message
         setLoading("Loading...");
         let err;
         try {
+            //call API
             const res = await api.post('/users/register', data.values);
+            //set message if successful
             setLoading(null);
             setSubmit("Account created successfully.");
         } catch (e) {
             if (e.response) {
                 err = e.response.data;
                 const { error } = err;
+                //set error message
                 setLoading(error);
             } else {
+                //set error message
                 setLoading("Some error has occured. Please try again.");
             }
         }

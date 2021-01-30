@@ -8,6 +8,7 @@ import 'react-day-picker/lib/style.css';
 const Calendar = (callback) => {
     const [submit, setSubmit] = useState(false);
 
+    //set inicial values
     const data = useFormik({
         initialValues: {
             date: '',
@@ -19,6 +20,7 @@ const Calendar = (callback) => {
             userID: '',
         },
 
+        //validate inputs
         validationSchema: Yup.object().shape({
             date: Yup.string().required('Date is required'),
             time: Yup.string().required('Time is required'),
@@ -30,23 +32,29 @@ const Calendar = (callback) => {
         }),
 
         onSubmit: values => {
+            //create booking if all information is correctly passed
             addBooking();
         }
 
     });
 
     const addBooking = async () => {
+        //set loading message
         setSubmit('Loading...');
         let err;
         try {
+            //call API
             const res = await api.post(`/bookings`, data.values);
+            //set message if successful
             setSubmit("Table successfully booked.");
         } catch (e) {
             if (e.response) {
                 err = e.response.data;
                 const { error } = err;
+                //set error message
                 setSubmit(error);
             } else {
+                //set error message
                 setSubmit("Some error has occured. Please try again.");
             }
         }

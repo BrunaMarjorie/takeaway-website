@@ -9,12 +9,14 @@ const Form = (callback) => {
 
     const [submit, setSubmit] = useState(false);
 
+    //get present date
     let today = new Date();
-
     today = today.getDate()+'/'+today.getMonth()+1+'/'+today.getFullYear();
 
+    //set inicial values
     const data = useFormik({
         initialValues: {
+            //set default date
             date: today,
             name: '',
             phoneNumber: '',
@@ -25,6 +27,7 @@ const Form = (callback) => {
             lastOrder: '',
         },
 
+        //validate inputs
         validationSchema: Yup.object().shape({
             name: Yup.string().required('Name is required').min(3, 'At least 3 characters'),
             phoneNumber: Yup.number().required('Phone number is required'),
@@ -34,25 +37,31 @@ const Form = (callback) => {
         }),
 
         onSubmit: values => {
+             //create order if all information is correctly passed
             addOrder();
         }
 
     });
 
     const addOrder = async () => {
+        //set loading message
         setSubmit('Creating order...')
         let err;
         try {
-            const res = await api.post('/takeaway', data.values);
+            //call API
+            const res = await api.post('/delivery', data.values);
+            //set message if successful
             setSubmit("Order created successfully.");
-            localStorage.setItem('lastOrders', JSON.stringify(data.values.lastOrder));
+            //clean local storage
             localStorage.removeItem('orders');
         } catch (e) {
             if (e.response) {
                 err = e.response;
                 const { error } = err;
+                //set error message
                 setSubmit(error);
             } else {
+                //set error message
                 setSubmit("Some error has occured. Please try again.");
             }
         }

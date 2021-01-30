@@ -12,6 +12,7 @@ const Homepage = () => {
           <Header />
       </Row>
       <Content>
+        {/* display welcome message and restaurant info  */}
             <h1>Welcome to Santana's Restaurant</h1>
             <h3>Available for eating-in, takeaway and delivery</h3>
             <p>Address: Somewhere.</p>
