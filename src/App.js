@@ -6,7 +6,7 @@ import Routes from './routes/routes';
 
 const App = () => {
 
-
+  //get menu from database
   const getMenu = async () => {
     const res = await api.get('/menu');
     localStorage.setItem('menuList', JSON.stringify(res.data.Menu));
@@ -20,7 +20,8 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Routes/>
+      {/* return routes  */}
+      <Routes />
     </>
   )
 }

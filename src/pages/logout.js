@@ -1,21 +1,13 @@
-import React, { useEffect } from 'react';
-import { Redirect, useHistory } from "react-router-dom";
+import React from 'react';
+import { Redirect } from "react-router-dom";
 
 
 const Logout = () => {
-
+    //clear session
     sessionStorage.clear();
-    localStorage.removeItem('menuList');
-    localStorage.removeItem('orders');
-
-    const history = useHistory();
-
-    useEffect(() => {
-        history.go(0);
-
-    }, [])
-      
-
+    //clear menu list
+    localStorage.clear();
+    //return to homepage
     return <Redirect to='/' />
 }
 

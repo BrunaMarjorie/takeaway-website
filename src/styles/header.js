@@ -27,29 +27,34 @@ const Menubar = styled.nav`
   }
 `;
 
-const Header = (props) => {
+const Header = () => {
 
     const [auth, setAuth] = useState();
-    
 
+    //collect user details
     useEffect(() => {
         setAuth(JSON.parse(sessionStorage.getItem('user')));
 
     }, []);
 
-
+    //check if user is authenticated
     const isAuth = () => {
         if (!auth) {
+            //return Login link if no user logged in
             return <Link to='/login'>Login</Link>
         } else {
+            //return Logout link if user is logged in
             return <Link to='/logout'>{auth.name}(Logout)</Link>
         }
     }
 
     const isStaff = () => {
         if (auth) {
+            //if user is logged in, collect their status
             const status = auth.status;
             if (status) {
+                //if user is either a staff member or admnistrator,
+                //return link to staff page
                 if (status === 'staff' || status === 'admin') {
                     return <Link to='/staffpage'>Staff Page</Link>;
                 } else {
@@ -62,7 +67,7 @@ const Header = (props) => {
     return (
         <Menubar>
             <Navbar bg="light" expand="lg">
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse >
                     <Nav className="ml-auto">
                         <Link to='/'>Home</Link>

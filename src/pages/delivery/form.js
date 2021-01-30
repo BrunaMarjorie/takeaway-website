@@ -51,6 +51,7 @@ const Form = (callback) => {
             //call API
             const res = await api.post('/delivery', data.values);
             //set message if successful
+            console.log(res);
             setSubmit("Order created successfully.");
             //clean local storage
             localStorage.removeItem('orders');

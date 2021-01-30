@@ -24,6 +24,7 @@ const Order = (props) => {
         if (type === 'delivery') {
             //call API sending order ID
             result = await api.get(`/delivery/${id}`);
+            console.log(result);
             //set orders
             setOrders(result.data.deliveryList);
         }
@@ -48,26 +49,26 @@ const Order = (props) => {
             const comment = object.comment;
 
             //iterate through order array to collect items 
-            const itemList = order.map((value, key) => {
+            const itemList = order.map((value, items) => {
                 return (
-                    <tr key={key}>{value.item}</tr>);
+                    <p key={items}>{value.item}</p>);
             });
             //iterate through order array to collect dishes 
-            const dishList = order.map((value, key) => {
+            const dishList = order.map((value, dishes) => {
                 return (
-                    <tr key={key}>{value.dish}</tr>);
+                    <p key={dishes}>{value.dish}</p>);
             });
             //iterate through order array to collect quantity 
-            const quantList = order.map((value, key) => {
+            const quantList = order.map((value, quant) => {
                 return (
-                    <tr key={key}>{value.quantity}</tr>);
+                    <p key={quant}>{value.quantity}</p>);
             });
             //iterate through order array to collect prices 
-            const priceList = order.map((value, key) => {
+            const priceList = order.map((value, prices) => {
                 //format numbers
                 const price = parseFloat(value.price).toFixed(2);
                 return (
-                    <tr key={key}>{price}</tr>);
+                    <p key={prices}>{price}</p>);
             });
             //return table
             return (

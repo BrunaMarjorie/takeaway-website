@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+//import pages
 import Menu from '../pages/menu/menuList';
 import Homepage from '../pages/homepage/homepage';
 import SignIn from '../pages/signIn/signIn';
@@ -20,6 +20,7 @@ const Routes = () => {
     return (
         <Router>
             <Switch>
+                {/* set paths  */}
                 <Route path="/menu" exact component={Menu} />
                 <PrivateRoute path="/staffpage" exact component={StaffPage} />
                 <PrivateRoute path="/booking" exact component={Booking} />

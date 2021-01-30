@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 
 import { ComponentToPrint } from './componentToPrint';
 
-
+//react-to-print library
 const Printer = () => {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({

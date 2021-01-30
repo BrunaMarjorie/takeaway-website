@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+//fetch API
 const api = axios.create({
-    //baseURL: 'http://localhost:3001'
-    baseURL: 'https://santanas-api.herokuapp.com'
+    //local host
+    baseURL: 'http://localhost:3001'
+    //heroku api
+    //baseURL: 'https://santanas-api.herokuapp.com'
 });
 
 
