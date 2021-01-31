@@ -13,6 +13,7 @@ const Bookings = () => {
 
     //collect user information to display 
     const user = JSON.parse(sessionStorage.getItem('user'));
+    console.log(user);
 
     //formik form
     const { data, submit } = Form();
@@ -21,14 +22,13 @@ const Bookings = () => {
 
         //if user is a customer, set information to be displayed
         if (user.status === 'customer') {
-            data.setFieldValue('user', user.email);
             data.setFieldValue('name', user.name);
             data.setFieldValue('email', user.email);
             data.setFieldValue('phoneNumber', user.phoneNumber);
         }
 
         //set userID for any type of customer
-        data.setFieldValue('userID', user._id);
+        data.setFieldValue('user', user._id);
     }, []);
 
 
@@ -45,6 +45,8 @@ const Bookings = () => {
         selectedDay = selectedDay.getFullYear() + '/' + selectedDay.getMonth() + 1 + '/' + selectedDay.getDate();
         data.setFieldValue('date', selectedDay);
     }
+
+    console.log(data);
 
     return (
         <Container>

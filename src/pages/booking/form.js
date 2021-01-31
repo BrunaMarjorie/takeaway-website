@@ -17,7 +17,7 @@ const Calendar = (callback) => {
             name: '',
             email: '',
             phoneNumber: '',
-            userID: '',
+            user: '',
         },
 
         //validate inputs
@@ -28,11 +28,12 @@ const Calendar = (callback) => {
             name: Yup.string().required('Name is required').min(3, 'At least 3 characters'),
             email: Yup.string().required('Email is required').email('Invalid format'),
             phoneNumber: Yup.number().required('Phone number is required'),
-            user: Yup.string().required('You must be logged in')
+
         }),
 
         onSubmit: values => {
             //create booking if all information is correctly passed
+            console.log('here');
             addBooking();
         }
 
